@@ -21,11 +21,24 @@ public class LibrarySystemTeam {
 
         ArrayList<Book> bookList = new ArrayList<Book>();//Create an Book objects Array
         try ( BufferedReader myBuffer = new BufferedReader(new FileReader("MOCK_DATA.csv"))) { //To read the file
+            
             String line; // To store each line of the file
+            line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
+            
             while ((line = myBuffer.readLine()) != null) { // while loop  to go through the file line by line until line is equals to null
                 String[] values = line.split(","); // String Array to store the separated values on the line
                 //System.out.println(values[1]);
-
+                
+                //Variables to store values an pass them to the new book object 
+                String id = values[0];
+                String author_first = values[1];
+                String author_last = values[2];
+                String book_title = values[3];
+                String genre = values[4];
+                
+                Book myBook = new Book(id,author_first,author_last,book_title,genre);// Create a book object for the current line 
+                
+                bookList.add(myBook); // adding book objects to ArrayList
             }
         } catch (FileNotFoundException ex) {
             System.out.println("File not found");
@@ -33,7 +46,19 @@ public class LibrarySystemTeam {
         } catch (IOException ex) {
             System.out.println("IOException");
         }
+        
+        
+        
+        System.out.println(bookList);
+        
+        
+        
+        
     }
+    
+    
+    
+    
     
     
 
