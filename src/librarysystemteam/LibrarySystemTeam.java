@@ -10,34 +10,33 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author Sandy
  */
 public class LibrarySystemTeam {
-    
+
     public static void main(String[] args) {
 
         ArrayList<Book> bookList = new ArrayList<Book>();//Create an Book objects Array
         try ( BufferedReader myBuffer = new BufferedReader(new FileReader("MOCK_DATA.csv"))) { //To read the file
-            
+
             String line; // To store each line of the file
             line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
-            
+
             while ((line = myBuffer.readLine()) != null) { // while loop  to go through the file line by line until line is equals to null
                 String[] values = line.split(","); // String Array to store the separated values on the line
-                //System.out.println(values[1]);
-                
+                //System.out.println(values[1]) Test;
+
                 //Variables to store values an pass them to the new book object 
                 String id = values[0];
                 String author_first = values[1];
                 String author_last = values[2];
                 String book_title = values[3];
                 String genre = values[4];
-                
-                Book myBook = new Book(id,author_first,author_last,book_title,genre);// Create a book object for the current line 
-                
+
+                Book myBook = new Book(id, author_first, author_last, book_title, genre);// Create a book object for the current line 
+
                 bookList.add(myBook); // adding book objects to ArrayList
             }
         } catch (FileNotFoundException ex) {
@@ -46,22 +45,36 @@ public class LibrarySystemTeam {
         } catch (IOException ex) {
             System.out.println("IOException");
         }
+
         
+        //System.out.println(bookList); Test
+        System.out.println("LINEAL SEARCH");
+        // Searching in the array using lineal search
+        Book searchedBook = linearSearch(bookList, "beast");
         
-        
-        System.out.println(bookList);
-        
-        
-        
-        
+        if (searchedBook == null){
+                  System.out.println("Element not found");
+  
+        } else {       
+            System.out.println(searchedBook);
+                    
+        }
     }
     
-    
-    
-    
-    
-    
-
+    public static Book linearSearch(ArrayList<Book> bookList, String targetBook) {
+         
+            
+            for (int i = 0; i < bookList.size() ; i++) {
+                Book myBook = bookList.get(i);
+                String title = myBook.getBook_title().toLowerCase();// create variables to set them to lower case 
+                String name = myBook.getAuthor_name().toLowerCase();
+                
+                if (title.contains(targetBook.toLowerCase()) || name.contains(targetBook.toLowerCase())) 
+                    return myBook;
+            }
+            
+        return null;
+    }
 
     /**
      * @param args the command line arguments
@@ -155,5 +168,4 @@ public class LibrarySystemTeam {
 //        //It will break out of the loop whenever the user enters a valid option
 //        } while (inputValid == false);
 //    }
-    
 }
