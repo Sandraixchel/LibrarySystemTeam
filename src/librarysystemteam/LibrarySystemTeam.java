@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+import static librarysystemteam.Library.linearSearch;
 
 /**
  *
@@ -46,39 +48,66 @@ public class LibrarySystemTeam {
             System.out.println("IOException");
         }
 
-        
-        //System.out.println(bookList); Test
-        System.out.println("LINEAL SEARCH");
-        // Searching in the array using lineal search
-        Book searchedBook = linearSearch(bookList, "beast");
-        
-        if (searchedBook == null){
-                  System.out.println("Element not found");
-  
-        } else {       
-            System.out.println(searchedBook);
-                    
-        }
-    }
-    
-    public static Book linearSearch(ArrayList<Book> bookList, String targetBook) {
-         
-            
-            for (int i = 0; i < bookList.size() ; i++) {
-                Book myBook = bookList.get(i);
-                String title = myBook.getBook_title().toLowerCase();// create variables to set them to lower case 
-                String name = myBook.getAuthor_name().toLowerCase();
-                
-                if (title.contains(targetBook.toLowerCase()) || name.contains(targetBook.toLowerCase())) 
-                    return myBook;
-            }
-            
-        return null;
-    }
+        Library myLibrary = new Library(bookList);
 
-    /**
-     * @param args the command line arguments
-     */
+
+        //Creates an Array of options for the menu
+        String[] menuOptions = {"Search for a book", "Search for a student"};
+
+        //To create a menu object with the menuOptions Array
+        Menu menuLibrary = new Menu(menuOptions);
+
+        //Calls the showMenu method from the menu class and out prints it
+        System.out.println(menuLibrary.showMenu("Library System Menu"));
+
+        boolean inputValid;
+
+        do {
+            //Set the boolean variable as true so the loop can stop running when the userInput is a valid option
+            inputValid = true;
+
+            //To read the user Input
+            Scanner myScanner = new Scanner(System.in);
+            //Variable to store user input selection
+            int selectedOption = myScanner.nextInt();
+
+            myScanner.nextLine();
+
+            if (selectedOption == 0) {
+
+                System.out.println("Please enter a title or author name");
+
+                String selected_title_author = myScanner.nextLine();
+
+                //Library.linearSearch(bookList, selected_title_author);
+
+             Book searchedBook = linearSearch(bookList, selected_title_author);
+
+                if (searchedBook == null) {
+                    System.out.println("Sorry, we couldn't find that book. Please enter a title or author name");
+                    
+                    
+                } else {
+                    System.out.println(searchedBook);
+
+                }
+
+            }else{
+
+                System.out.println("Please enter a valid option");
+
+                //Set the boolean to false so the loop keeps going until the userInput is valid
+                inputValid = false;
+            }
+        //It will break out of the loop whenever the user enters a valid option
+
+        } while (inputValid == false);
+    }
+}
+
+        /**
+         * @param args the command line arguments
+         */
 //    public static void main(String[] args) {
 //        // TODO code application logic here
 //        System.out.println("Holiii");
@@ -168,4 +197,4 @@ public class LibrarySystemTeam {
 //        //It will break out of the loop whenever the user enters a valid option
 //        } while (inputValid == false);
 //    }
-}
+    
