@@ -38,6 +38,76 @@ public class Library {
         return null;
     }
     
+    public static void bubbleSortTitle(ArrayList<Book> bookList){
+        
+         System.out.println("--List of books ordered alphabetically--");
+         int n = bookList.size();
+         
+         Book temp;
+         
+//        for (int i = 0; i < n - 1; i++) {      
+//           
+//            Book myBook2 = bookList.get(i);
+//            String sorttitle = myBook2.getBook_title().toLowerCase();
+//            
+//            for (int j = 0; j < n - i - 1; j++) {
+//            if (bookList[j].equals(bookList[j + 1])) {
+//                continue;
+//            }
+//            if (!bookList[j].equals(bookList[j + 1]) && bookList[j].hashCode() > boolean [j + 1].hashCode()) {
+//                temp = bookList[j];
+//                bookList[j] = bookList[j + 1];
+//                bookList[j + 1] = temp;
+//            }
+//        }
+//    }
+//            
+//
+//            }
+//        
+
+
+
+//        do{
+//            swapped = false;
+//            for (int i = 0; i < n - 1; i++) {
+//                if(bookList.get(i).equals(bookList.get(i +1))) > 0{
+//                    swapped = true;
+//                    temp = bookList.get(i);
+//                    bookList.set(i, bookList.get(i+1));
+//                    bookList.set(i + 1,temp);
+//                }
+//                
+//            }
+//            
+//            
+//        } while(swapped);
+         
+    
+    
+    
+    
+//        public static void bubbleSortName(ArrayList<Book> bookList){
+
+//        String sortname = myBook2.getAuthor_name().toLowerCase();
+//            
+//        }
+           
+    }
+    
+     public static void ArraySorted(ArrayList<Book> bookList) {
+
+                    String toPrint = "[ ";
+                    for (int i = 0; i < bookList.size(); i++) {
+                     toPrint += bookList.get(i) + " ";
+
+                    }
+                    toPrint += "]";
+                    System.out.println(toPrint);
+
+                }
+    
+    
 }
 
 

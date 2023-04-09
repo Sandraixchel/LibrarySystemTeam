@@ -52,7 +52,7 @@ public class LibrarySystemTeam {
 
 
         //Creates an Array of options for the menu
-        String[] menuOptions = {"Search for a book", "Search for a student"};
+        String[] menuOptions = {"Search for a book", "Search for a student","List all books", "List all students"};
 
         //To create a menu object with the menuOptions Array
         Menu menuLibrary = new Menu(menuOptions);
@@ -91,6 +91,55 @@ public class LibrarySystemTeam {
                     System.out.println(searchedBook);
 
                 }
+
+            }
+            if (selectedOption == 2){
+                String[] menuOptions2 = {"Title", "Author Name"};
+                Menu menuList = new Menu(menuOptions2);
+                System.out.println(menuList.showMenu("List books by:"));
+                
+                boolean inputValid2;
+                
+                do{
+                    inputValid2 = true;
+                    Scanner myScanner2 = new Scanner(System.in);
+                    int selectedOption2 = myScanner.nextInt();
+                    myScanner.nextLine();
+                    
+                    if (selectedOption2 == 0){
+                        
+                        System.out.println("By title");
+                        //Calling the method
+                        Library.bubbleSortTitle(bookList);
+
+                       // Printing the array after sorted
+                        Library.ArraySorted(bookList);
+                    }
+                    else if  (selectedOption2 == 1){
+                        
+                        System.out.println("By Author Name");
+                        //Calling the method
+  //                      Library.bubbleSortName(bookList);
+
+                       // Printing the array after sorted
+                        Library.ArraySorted(bookList);
+                        
+                        
+                    }
+                        
+                        
+                    
+                    else{
+
+                        System.out.println("Please enter a valid option");
+                        inputValid2 = false;
+                   
+                    }
+                   
+                
+                } while (inputValid2 == false);
+  
+            
 
             }else{
 
