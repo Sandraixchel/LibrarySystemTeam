@@ -47,9 +47,39 @@ public class LibrarySystemTeam {
         } catch (IOException ex) {
             System.out.println("IOException");
         }
+        
+        
+        ArrayList<Student> studentList = new ArrayList<Student>();//Create a Student objects Array
+        try ( BufferedReader myBuffer = new BufferedReader(new FileReader("test.txt"))) { //To read the file
+
+            String line; // To store each line of the file
+            line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
+
+            while ((line = myBuffer.readLine()) != null) { // while loop  to go through the file line by line until line is equals to null
+                String[] values = line.split(","); // String Array to store the separated values on the line
+                //System.out.println(values[1]) Test;
+
+                //Variables to store values an pass them to the new book object 
+                String student = values[0];
+                String firstName = values[1];
+                String lastName = values[2];
+                String gender = values[3];
+                String country = values[4];
+                String date = values[5];
+
+                Student myStudent = new Student(student, firstName, lastName, gender, country, date);// Create a student object for the current line 
+
+                studentList.add(myStudent); // adding student objects to ArrayList
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not found");
+
+        } catch (IOException ex) {
+            System.out.println("IOException");
+        }
 
         Library myLibrary = new Library(bookList);
-
+        School mySchool = new School(studentList);
 
         //Creates an Array of options for the menu
         String[] menuOptions = {"Search for a book", "Search for a student","List all books", "List all students"};
@@ -141,7 +171,53 @@ public class LibrarySystemTeam {
   
             
 
-            }else{
+            }
+            if (selectedOption == 3){
+                String[] menuOptions3 = {"Student Name", "ID"};
+                Menu menuList3 = new Menu(menuOptions3);
+                System.out.println(menuList3.showMenu("List students by:"));
+                
+                boolean inputValid3;
+                
+                do{
+                    inputValid3 = true;
+                    Scanner myScanner3 = new Scanner(System.in);
+                    int selectedOption3 = myScanner.nextInt();
+                    myScanner.nextLine();
+                    
+                    if (selectedOption3 == 0){
+                        
+                        System.out.println("By Student Name");
+                        //Calling the method
+                        
+
+                       // Printing the array after sorted
+                        
+                    }
+                    else if  (selectedOption3 == 1){
+                        
+                        System.out.println("By ID");
+                        //Calling the method
+
+
+                       // Printing the array after sorted
+
+                    }
+               
+                    
+                    else{
+
+                        System.out.println("Please enter a valid option");
+                        inputValid3 = false;
+                   
+                    }
+                   
+                
+                } while (inputValid3 == false);
+                    
+                }
+            
+            else{
 
                 System.out.println("Please enter a valid option");
 
