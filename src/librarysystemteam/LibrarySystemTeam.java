@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import static librarysystemteam.Library.linearSearchBook;
 import static librarysystemteam.Library.linearSearchStudent;
+import librarysystemteam.Student.StudentID;
 
 /**
  *
@@ -51,6 +52,8 @@ public class LibrarySystemTeam {
         }
 
         ArrayList<Student> studentList = new ArrayList<Student>();//Create a Student objects Array
+        //ArrayList<int> studentIDList = new ArrayList<int>();//Create a Student objects Array
+        
         try ( BufferedReader myBuffer = new BufferedReader(new FileReader("test.txt"))) { //To read the file
 
             String line; // To store each line of the file
@@ -61,16 +64,18 @@ public class LibrarySystemTeam {
                 //System.out.println(values[1]) Test;
 
                 //Variables to store values an pass them to the new book object 
-                String student = values[0];
+                int studentID = Integer.parseInt(values[0]); //Convert String to int
                 String firstName = values[1];
                 String lastName = values[2];
                 String gender = values[3];
                 String country = values[4];
                 String date = values[5];
 
-                Student myStudent = new Student(student, firstName, lastName, gender, country, date);// Create a student object for the current line 
-
+                Student myStudent = new Student(studentID, firstName, lastName, gender, country, date);// Create a student object for the current line 
+                //StudentID myStudentID = new StudentID (studentID);
+                
                 studentList.add(myStudent); // adding student objects to ArrayList
+                //studentIDList.add(myStudent.getStudentID());
             }
         } catch (FileNotFoundException ex) {
             System.out.println("File not found");

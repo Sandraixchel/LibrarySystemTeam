@@ -5,6 +5,7 @@
 package librarysystemteam;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -97,7 +98,7 @@ public class Library {
     }
     
      public static void ArraySorted(ArrayList<Book> bookList) {
-
+                    
                     String toPrint = "[ ";
                     for (int i = 0; i < bookList.size(); i++) {
                      toPrint += bookList.get(i) + " ";
@@ -121,6 +122,35 @@ public class Library {
             
         return null;
     }
+       public static Student binarySearchStudent(ArrayList<Student> studentList,int first, int last, int target){
+           
+       
+        System.out.println("Sorted Array: " + studentList);
+        
+       
+        int mid = (first+last)/2;
+        
+        while (first <= last){
+            if (studentList.get(mid).getStudentID() < target){
+            first = mid + 1;
+            
+        }else if(studentList.get(mid).getStudentID() == target ){
+            System.out.println("Element is found at index: " + mid);
+        
+        break;
+        
+        }else {
+            last = mid -1;
+        
+        }
+            mid = (first + last)/2;
+        }
+        if (first>last){
+            System.out.println("Element is not found");
+        }
+        return null;
+       
+       }
     
     
 }

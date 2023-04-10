@@ -11,7 +11,7 @@ package librarysystemteam;
 public class Student {
     
     //PROPERTIES
-    protected String studentID;
+    protected int studentID;
     protected String student_name;
     protected String gender;
     protected String country;
@@ -19,7 +19,7 @@ public class Student {
 
     
     //CONSTRUCTORS
-    public Student(String studentID, String firstName, String lastName, String gender, String country, String age) {
+    public Student(int studentID, String firstName, String lastName, String gender, String country, String age) {
         this.studentID = studentID;
         this.student_name = firstName + " " + lastName; //Concatinating Strings 
         this.gender = gender;
@@ -29,11 +29,12 @@ public class Student {
      //METHODS
       
     }
+    
 
-    public String getStudentID() {
+    public int getStudentID() {
         return studentID;
     }
-
+    
     public String getStudentName() {
         return student_name;
     }
