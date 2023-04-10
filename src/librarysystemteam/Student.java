@@ -11,39 +11,31 @@ package librarysystemteam;
 public class Student {
     
     //PROPERTIES
-    protected String student;
-    protected String firstName;
-    protected String lastName;
+    protected String studentID;
+    protected String student_name;
     protected String gender;
     protected String country;
-    protected String date;
+    protected String age;
 
     
     //CONSTRUCTORS
-    public Student(String student, String firstName, String lastName, String gender, String country, String date) {
-        this.student = student;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Student(String studentID, String firstName, String lastName, String gender, String country, String age) {
+        this.studentID = studentID;
+        this.student_name = firstName + " " + lastName; //Concatinating Strings 
         this.gender = gender;
         this.country = country;
-        this.date = date;
+        this.age = age;
         
      //METHODS
-     
-     
-     
+      
     }
 
-    public String getStudent() {
-        return student;
+    public String getStudentID() {
+        return studentID;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    public String getStudentName() {
+        return student_name;
     }
 
     public String getGender() {
@@ -55,12 +47,12 @@ public class Student {
     }
 
     public String getDate() {
-        return date;
+        return age;
     }
 
     @Override
     public String toString() {
-        return "Student{" + "student=" + student + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", country=" + country + ", date=" + date + '}';
+        return "\nStudent {" + " ID= " + studentID + ", Name= " + student_name + ", Gender= " + gender + ", Country= " + country + ", Age = " + age + '}';
     }
     
     
