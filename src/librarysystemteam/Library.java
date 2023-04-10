@@ -11,19 +11,23 @@ import java.util.ArrayList;
  * @author Sandy
  */
 public class Library {
+    
     //We Need to add the Array of students objects to the properties
     protected ArrayList<Book> bookList;
+    protected ArrayList<Student> studentList;
     
     //We Need to add student array to the paramethers to create a library object
-    public Library(ArrayList<Book> bookList){
+    public Library(ArrayList<Book> bookList, ArrayList<Student> studentList){
         
         this.bookList = bookList;
+        this.studentList = studentList;
+        
 
 
  
     }
   // Here we can put all of our methods either searching or sorting for books or students, so we can call them from the main 
-    public static Book linearSearch(ArrayList<Book> bookList, String targetBook) {
+    public static Book linearSearchBook(ArrayList<Book> bookList, String targetBook) {
          
             
             for (int i = 0; i < bookList.size() ; i++) {
@@ -61,12 +65,9 @@ public class Library {
 //            }
 //        }
 //    }
-//            
-//
+//        
 //            }
 //        
-
-
 
 //        do{
 //            swapped = false;
@@ -106,6 +107,20 @@ public class Library {
                     System.out.println(toPrint);
 
                 }
+       public static Student linearSearchStudent(ArrayList<Student> studentList, String targetStudent) {
+         
+            
+            for (int i = 0; i < studentList.size() ; i++) {
+                Student myStudent = studentList.get(i);
+                String ID = myStudent.studentID;// create variables to set them to lower case 
+                String name = myStudent.student_name.toLowerCase();
+                
+                if (ID.contains(targetStudent.toLowerCase()) || name.contains(targetStudent.toLowerCase())) 
+                    return myStudent;
+            }
+            
+        return null;
+    }
     
     
 }
