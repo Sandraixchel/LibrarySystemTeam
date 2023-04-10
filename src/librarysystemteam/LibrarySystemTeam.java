@@ -10,7 +10,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import static librarysystemteam.Library.linearSearch;
+import static librarysystemteam.Library.linearSearchBook;
+import static librarysystemteam.Library.linearSearchStudent;
 
 /**
  *
@@ -18,6 +19,7 @@ import static librarysystemteam.Library.linearSearch;
  */
 public class LibrarySystemTeam {
 
+    @SuppressWarnings("empty-statement")
     public static void main(String[] args) {
 
         ArrayList<Book> bookList = new ArrayList<Book>();//Create an Book objects Array
@@ -47,8 +49,7 @@ public class LibrarySystemTeam {
         } catch (IOException ex) {
             System.out.println("IOException");
         }
-        
-        
+
         ArrayList<Student> studentList = new ArrayList<Student>();//Create a Student objects Array
         try ( BufferedReader myBuffer = new BufferedReader(new FileReader("test.txt"))) { //To read the file
 
@@ -78,11 +79,11 @@ public class LibrarySystemTeam {
             System.out.println("IOException");
         }
 
-        Library myLibrary = new Library(bookList);
-        School mySchool = new School(studentList);
+        Library myLibrary = new Library(bookList, studentList); //Creates our library with students and books arrays
 
+        //System.out.println(studentList); //Test to check studentArray
         //Creates an Array of options for the menu
-        String[] menuOptions = {"Search for a book", "Search for a student","List all books", "List all students"};
+        String[] menuOptions = {"Search for a book", "Search for a student", "List all books", "List all students"};
 
         //To create a menu object with the menuOptions Array
         Menu menuLibrary = new Menu(menuOptions);
@@ -109,130 +110,128 @@ public class LibrarySystemTeam {
 
                 String selected_title_author = myScanner.nextLine();
 
-                //Library.linearSearch(bookList, selected_title_author);
-
-             Book searchedBook = linearSearch(bookList, selected_title_author);
+                //Library.linearSearchBook(bookList, selected_title_author);
+                Book searchedBook = linearSearchBook(bookList, selected_title_author);
 
                 if (searchedBook == null) {
                     System.out.println("Sorry, we couldn't find that book. Please enter a title or author name");
-                    
-                    
+
                 } else {
                     System.out.println(searchedBook);
 
                 }
 
-            }
-            if (selectedOption == 2){
-                String[] menuOptions2 = {"Title", "Author Name"};
-                Menu menuList = new Menu(menuOptions2);
-                System.out.println(menuList.showMenu("List books by:"));
-                
-                boolean inputValid2;
-                
-                do{
-                    inputValid2 = true;
-                    Scanner myScanner2 = new Scanner(System.in);
-                    int selectedOption2 = myScanner.nextInt();
-                    myScanner.nextLine();
-                    
-                    if (selectedOption2 == 0){
-                        
-                        System.out.println("By title");
-                        //Calling the method
-                        Library.bubbleSortTitle(bookList);
+            }else if (selectedOption == 1) {
 
-                       // Printing the array after sorted
-                        Library.ArraySorted(bookList);
-                    }
-                    else if  (selectedOption2 == 1){
-                        
-                        System.out.println("By Author Name");
-                        //Calling the method
-  //                      Library.bubbleSortName(bookList);
+                    System.out.println("Please enter a student name or student ID");
 
-                       // Printing the array after sorted
-                        Library.ArraySorted(bookList);
-                        
-                        
-                    }
-                        
-                        
-                    
-                    else{
+                    String selected_student = myScanner.nextLine();
 
-                        System.out.println("Please enter a valid option");
-                        inputValid2 = false;
-                   
-                    }
-                   
-                
-                } while (inputValid2 == false);
-  
-            
+                    //Library.linearSearchBook(bookList, selected_title_author);
+                    Student searchedStudent = linearSearchStudent(studentList, selected_student);
 
-            }
-            if (selectedOption == 3){
-                String[] menuOptions3 = {"Student Name", "ID"};
-                Menu menuList3 = new Menu(menuOptions3);
-                System.out.println(menuList3.showMenu("List students by:"));
-                
-                boolean inputValid3;
-                
-                do{
-                    inputValid3 = true;
-                    Scanner myScanner3 = new Scanner(System.in);
-                    int selectedOption3 = myScanner.nextInt();
-                    myScanner.nextLine();
-                    
-                    if (selectedOption3 == 0){
-                        
-                        System.out.println("By Student Name");
-                        //Calling the method
-                        
+                    if (searchedStudent == null) {
+                        System.out.println("Sorry, we couldn't find that student. Please enter another student name or ID ");
 
-                       // Printing the array after sorted
-                        
-                    }
-                    else if  (selectedOption3 == 1){
-                        
-                        System.out.println("By ID");
-                        //Calling the method
-
-
-                       // Printing the array after sorted
+                    } else {
+                        System.out.println(searchedStudent);
 
                     }
-               
-                    
-                    else{
 
-                        System.out.println("Please enter a valid option");
-                        inputValid3 = false;
-                   
-                    }
-                   
                 
-                } while (inputValid3 == false);
-                    
+            }else if (selectedOption == 2) {
+                    String[] menuOptions2 = {"Title", "Author Name"};
+                    Menu menuList = new Menu(menuOptions2);
+                    System.out.println(menuList.showMenu("List books by:"));
+
+                    boolean inputValid2;
+
+                    do {
+                        inputValid2 = true;
+                        Scanner myScanner2 = new Scanner(System.in);
+                        int selectedOption2 = myScanner.nextInt();
+                        myScanner.nextLine();
+
+                        if (selectedOption2 == 0) {
+
+                            System.out.println("By title");
+                            //Calling the method
+                            Library.bubbleSortTitle(bookList);
+
+                            // Printing the array after sorted
+                            Library.ArraySorted(bookList);
+                        } else if (selectedOption2 == 1) {
+
+                            System.out.println("By Author Name");
+                            //Calling the method
+                            //                      Library.bubbleSortName(bookList);
+
+                            // Printing the array after sorted
+                            Library.ArraySorted(bookList);
+
+                        } else {
+
+                            System.out.println("Please enter a valid option");
+                            inputValid2 = false;
+
+                        }
+
+                    } while (inputValid2 == false);
+
+                
+            }else if (selectedOption == 3) {
+                    String[] menuOptions3 = {"Student Name", "ID"};
+                    Menu menuList3 = new Menu(menuOptions3);
+                    System.out.println(menuList3.showMenu("List students by:"));
+
+                    boolean inputValid3;
+
+                    do {
+                        inputValid3 = true;
+                        Scanner myScanner3 = new Scanner(System.in);
+                        int selectedOption3 = myScanner.nextInt();
+                        myScanner.nextLine();
+
+                        if (selectedOption3 == 0) {
+
+                            System.out.println("By Student Name");
+                            //Calling the method
+
+                            // Printing the array after sorted
+                        } else if (selectedOption3 == 1) {
+
+                            System.out.println("By ID");
+                            //Calling the method
+
+                            // Printing the array after sorted
+                        } else {
+
+                            System.out.println("Please enter a valid option");
+                            inputValid3 = false;
+
+                        }
+
+                    } while (inputValid3 == false);
+
+                } else {
+
+                    System.out.println("Please enter a valid option");
+
+                    //Set the boolean to false so the loop keeps going until the userInput is valid
+                    inputValid = false;
                 }
-            
-            else{
+                //It will break out of the loop whenever the user enters a valid option
 
-                System.out.println("Please enter a valid option");
+            }while (inputValid == false);
+           
 
-                //Set the boolean to false so the loop keeps going until the userInput is valid
-                inputValid = false;
-            }
-        //It will break out of the loop whenever the user enters a valid option
-
-        } while (inputValid == false);
+        } 
     }
-}
 
-        /**
-         * @param args the command line arguments
-         */
+
+/**
+ * @param args the command line arguments
+ */
 //    public static void main(String[] args) {
 //        // TODO code application logic here
 //        System.out.println("Holiii");
@@ -322,4 +321,4 @@ public class LibrarySystemTeam {
 //        //It will break out of the loop whenever the user enters a valid option
 //        } while (inputValid == false);
 //    }
-    
+
