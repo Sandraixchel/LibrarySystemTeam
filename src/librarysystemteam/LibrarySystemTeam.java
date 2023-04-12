@@ -20,7 +20,7 @@ import static librarysystemteam.Library.linearSearchStudent;
  */
 public class LibrarySystemTeam {
 
-    @SuppressWarnings("empty-statement")
+    //@SuppressWarnings("empty-statement")
     public static void main(String[] args) {
 
         ArrayList<Book> bookList = new ArrayList<Book>();//Create an Book objects Array

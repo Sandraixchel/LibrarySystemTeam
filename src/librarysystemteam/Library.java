@@ -5,7 +5,7 @@
 package librarysystemteam;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 
 /**
  *
@@ -113,44 +113,46 @@ public class Library {
             
             for (int i = 0; i < studentList.size() ; i++) {
                 Student myStudent = studentList.get(i);
-                String ID = myStudent.studentID;// create variables to set them to lower case 
-                String name = myStudent.student_name.toLowerCase();
+                String ID = myStudent.studentID;
+                String name = myStudent.student_name.toLowerCase();// create variables to set them to lower case 
                 
                 if (ID.contains(targetStudent.toLowerCase()) || name.contains(targetStudent.toLowerCase())) 
                     return myStudent;
+                
+               
             }
             
         return null;
     }
-       public static Student binarySearchStudent(ArrayList<Student> studentList,int first, int last, int target){
-           
-       
-        System.out.println("Sorted Array: " + studentList);
-        
-       
-        int mid = (first+last)/2;
-        
-        while (first <= last){
-            if (studentList.get(mid).getStudentID() < target){
-            first = mid + 1;
-            
-        }else if(studentList.get(mid).getStudentID() == target ){
-            System.out.println("Element is found at index: " + mid);
-        
-        break;
-        
-        }else {
-            last = mid -1;
-        
-        }
-            mid = (first + last)/2;
-        }
-        if (first>last){
-            System.out.println("Element is not found");
-        }
-        return null;
-       
-       }
+//       public static int binarySearchStudent(ArrayList<Student> studentList,int first, int last, int studentTarget){
+//           
+//       
+//        System.out.println("Sorted Array: " + studentList);
+//        
+//       
+//        int mid = (first+last)/2;
+//        
+//        while (first <= last){
+//            if (studentList.get(mid).getStudentID() < studentTarget){
+//            first = mid + 1;
+//            
+//        }else if(studentList.get(mid).getStudentID() == studentTarget ){
+//            System.out.println("Element is found at index: " + mid);
+//        
+//        break;
+//        
+//        }else {
+//            last = mid -1;
+//        
+//        }
+//            mid = (first + last)/2;
+//        }
+//        if (first>last){
+//            System.out.println("Element is not found");
+//        }
+//        return -1;
+//       
+//       }
     
     
 }
