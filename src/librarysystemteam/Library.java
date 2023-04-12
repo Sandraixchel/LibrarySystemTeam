@@ -4,6 +4,9 @@
  */
 package librarysystemteam;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -124,6 +127,88 @@ public class Library {
             
         return null;
     }
+       
+       public static void studentBorrowing(ArrayList<Book> bookList, ArrayList<Student> studentList, String targetStudent){
+           
+           for (int i = 0; i < studentList.size() ; i++) {
+                Student myStudent = studentList.get(i);
+                String ID = myStudent.studentID;
+                                
+                if (ID.contains(targetStudent.toLowerCase())) 
+                    return myStudent;
+                
+               
+            }else if
+            
+        
+    }
+           
+           
+           
+            //initializing FileWriter
+            FileWriter file;
+            try
+            {
+                file = new FileWriter("BorrowingList.txt");
+
+                // Initializing BufferedWriter
+                BufferedWriter myWriter = new BufferedWriter(file);
+                System.out.println("Buffered Writer start writing :)");
+                
+                
+                
+                
+
+                // Use of write() method to write the value in 'ABC' file
+                // Printing E
+                myWriter.write(69);
+
+                // Printing 1
+                myWriter.write(49);
+
+                // Closing BufferWriter to end operation
+                myWriter.close();
+                System.out.println("Written successfully");
+            }
+            catch (IOException except)
+            {
+                except.printStackTrace();
+            }
+
+        }
+           
+          // BufferedWriter myWriter = new BufferedWriter(new FileWriter(<BorrowingList.txt>, true));
+           
+//           String data = "This is the data in the output file";
+//
+//            try {
+//                
+//             // Creates a FileWriter
+//              FileWriter file = new FileWriter("BorrowingList.txt");
+//
+//                
+//              // Creates a BufferedWriter
+//              BufferedWriter myWriter = new BufferedWriter("BorrowingList.txt");
+//
+//              // Writes the string to the file
+//              myWriter.write(data);
+//
+//              // Closes the writer
+//              myWriter.close();
+//            }
+//
+//            catch (Exception e) {
+//              e.getStackTrace();
+//            }
+           
+           
+       }
+       
+       
+       
+       
+       
+       
 //       public static int binarySearchStudent(ArrayList<Student> studentList,int first, int last, int studentTarget){
 //           
 //       
@@ -155,6 +240,6 @@ public class Library {
 //       }
     
     
-}
+
 
 
