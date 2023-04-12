@@ -5,8 +5,10 @@
 package librarysystemteam;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -205,7 +207,61 @@ public class LibrarySystemTeam {
                         }
 
                     } while (inputValid3 == false);
+                    
                     break;
+                case 4:
+                    System.out.println("Please enter student ID"); 
+                    String selected_id = myScanner.nextLine();
+                    //Library.linearSearchBook(bookList, selected_title_author);
+                    Student searched_id = linearSearchStudent(studentList, selected_id);
+                    if (searched_id == null) {
+                        System.out.println("Sorry, we couldn't find that student. Please enter another student ID again.");
+
+                    }else {
+                        System.out.println(searched_id);
+
+                    }
+ 
+                    System.out.println("Please enter a book title");
+                    String selected_title= myScanner.nextLine();
+                    //Library.linearSearchBook(bookList, selected_title_author);
+                    Book searchedTitle = linearSearchBook(bookList, selected_title);
+                    if (searchedTitle == null) {
+                        System.out.println("Sorry, we couldn't find that book. Please enter a book title again");
+                        
+                    } else {
+                        System.out.println(searchedTitle);
+
+                    
+                    Queue Borrowings = new Queue(100); //Creating a queue to save borrowed books
+                    String borrowed = (selected_id + selected_title);
+                    Borrowings.Enqueue(borrowed);
+                    
+                    try{
+
+                    // Initializing BufferedWriter
+                    BufferedWriter myWriter = new BufferedWriter(new FileWriter("BorrowingList.txt"));
+                    System.out.println("Adding book...");
+
+                    myWriter.write(borrowed);
+
+
+
+                    // Closing BufferWriter 
+                    myWriter.close();
+                    System.out.println("Student has been added to borrowings.");
+                }
+                catch (IOException except)
+                {
+                    System.out.println("Error writing this file.");
+                }
+                    
+                    
+                        
+                    }   break;
+                    
+                    
+                    
                 default:
                     System.out.println("Please enter a valid option");
                     //Set the boolean to false so the loop keeps going until the userInput is valid
@@ -218,6 +274,8 @@ public class LibrarySystemTeam {
 
         } 
     }
+
+
 
 
 /**

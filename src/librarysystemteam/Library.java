@@ -128,54 +128,39 @@ public class Library {
         return null;
     }
        
-       public static void studentBorrowing(ArrayList<Book> bookList, ArrayList<Student> studentList, String targetStudent){
-           
-           for (int i = 0; i < studentList.size() ; i++) {
-                Student myStudent = studentList.get(i);
-                String ID = myStudent.studentID;
-                                
-                if (ID.contains(targetStudent.toLowerCase())) 
-                    return myStudent;
-                
-               
-            }else if
-            
-        
-    }
-           
-           
-           
-            //initializing FileWriter
-            FileWriter file;
-            try
-            {
-                file = new FileWriter("BorrowingList.txt");
+       
+       
+       
+   
+       
+    
+//           
+//        public void addBorrowing(String file){   
+//           
+//           
+//            try
+//            {
+//                
+//                // Initializing BufferedWriter
+//                BufferedWriter myWriter = new BufferedWriter(new FileWriter("BorrowingList.txt"));
+//                System.out.println("Adding book...");
+//                
+//                myWriter.write(borrowed);
+//                
+//               
+//
+//                // Closing BufferWriter 
+//                myWriter.close();
+//                System.out.println("Student has been added to borrowings.");
+//            }
+//            catch (IOException except)
+//            {
+//                System.out.println("Error writing this file.");
+//            }
+//
+//        }
+}
 
-                // Initializing BufferedWriter
-                BufferedWriter myWriter = new BufferedWriter(file);
-                System.out.println("Buffered Writer start writing :)");
-                
-                
-                
-                
-
-                // Use of write() method to write the value in 'ABC' file
-                // Printing E
-                myWriter.write(69);
-
-                // Printing 1
-                myWriter.write(49);
-
-                // Closing BufferWriter to end operation
-                myWriter.close();
-                System.out.println("Written successfully");
-            }
-            catch (IOException except)
-            {
-                except.printStackTrace();
-            }
-
-        }
            
           // BufferedWriter myWriter = new BufferedWriter(new FileWriter(<BorrowingList.txt>, true));
            
@@ -202,7 +187,7 @@ public class Library {
 //            }
            
            
-       }
+       
        
        
        
