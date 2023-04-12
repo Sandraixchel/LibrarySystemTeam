@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import static librarysystemteam.Library.linearSearchBook;
 import static librarysystemteam.Library.linearSearchStudent;
-import librarysystemteam.Student.StudentID;
+
 
 /**
  *
@@ -64,7 +64,8 @@ public class LibrarySystemTeam {
                 //System.out.println(values[1]) Test;
 
                 //Variables to store values an pass them to the new book object 
-                int studentID = Integer.parseInt(values[0]); //Convert String to int
+                String studentID = values[0]; //Convert String to int
+                //int studentID = Integer.parseInt(values[0]); //Convert String to int
                 String firstName = values[1];
                 String lastName = values[2];
                 String gender = values[3];
@@ -109,32 +110,25 @@ public class LibrarySystemTeam {
 
             myScanner.nextLine();
 
-            if (selectedOption == 0) {
-
-                System.out.println("Please enter a title or author name");
-
-                String selected_title_author = myScanner.nextLine();
-
-                //Library.linearSearchBook(bookList, selected_title_author);
-                Book searchedBook = linearSearchBook(bookList, selected_title_author);
-
-                if (searchedBook == null) {
-                    System.out.println("Sorry, we couldn't find that book. Please enter a title or author name");
-
-                } else {
-                    System.out.println(searchedBook);
-
-                }
-
-            }else if (selectedOption == 1) {
-
+            switch (selectedOption) {
+                case 0:
+                    System.out.println("Please enter a title or author name");
+                    String selected_title_author = myScanner.nextLine();
+                    //Library.linearSearchBook(bookList, selected_title_author);
+                    Book searchedBook = linearSearchBook(bookList, selected_title_author);
+                    if (searchedBook == null) {
+                        System.out.println("Sorry, we couldn't find that book. Please enter a title or author name");
+                        
+                    } else {
+                        System.out.println(searchedBook);
+                        
+                    }   break;
+            //It will break out of the loop whenever the user enters a valid option
+                case 1:
                     System.out.println("Please enter a student name or student ID");
-
                     String selected_student = myScanner.nextLine();
-
                     //Library.linearSearchBook(bookList, selected_title_author);
                     Student searchedStudent = linearSearchStudent(studentList, selected_student);
-
                     if (searchedStudent == null) {
                         System.out.println("Sorry, we couldn't find that student. Please enter another student name or ID ");
 
@@ -142,15 +136,12 @@ public class LibrarySystemTeam {
                         System.out.println(searchedStudent);
 
                     }
-
-                
-            }else if (selectedOption == 2) {
+                    break;
+                case 2:
                     String[] menuOptions2 = {"Title", "Author Name"};
                     Menu menuList = new Menu(menuOptions2);
                     System.out.println(menuList.showMenu("List books by:"));
-
                     boolean inputValid2;
-
                     do {
                         inputValid2 = true;
                         Scanner myScanner2 = new Scanner(System.in);
@@ -182,15 +173,12 @@ public class LibrarySystemTeam {
                         }
 
                     } while (inputValid2 == false);
-
-                
-            }else if (selectedOption == 3) {
+                    break;
+                case 3:
                     String[] menuOptions3 = {"Student Name", "ID"};
                     Menu menuList3 = new Menu(menuOptions3);
                     System.out.println(menuList3.showMenu("List students by:"));
-
                     boolean inputValid3;
-
                     do {
                         inputValid3 = true;
                         Scanner myScanner3 = new Scanner(System.in);
@@ -217,15 +205,13 @@ public class LibrarySystemTeam {
                         }
 
                     } while (inputValid3 == false);
-
-                } else {
-
+                    break;
+                default:
                     System.out.println("Please enter a valid option");
-
                     //Set the boolean to false so the loop keeps going until the userInput is valid
                     inputValid = false;
-                }
-                //It will break out of the loop whenever the user enters a valid option
+                    break;
+            }
 
             }while (inputValid == false);
            
