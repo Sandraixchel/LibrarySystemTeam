@@ -279,6 +279,55 @@ public class LibrarySystemTeam {
                 {
                     System.out.println("Error writing this file.");
                 }
+                    
+                    try ( BufferedReader myBuffer = new BufferedReader(new FileReader("BorrowingList.txt"))) { //To read the file
+
+                    String line; // To store each line of the file
+                    line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
+
+                    while ((line = myBuffer.readLine()) != null) { // while loop  to go through the file line by line until line is equals to null
+                        String[] values = line.split(","); // String Array to store the separated values on the line
+                        //System.out.println(values[1]) Test;
+
+                        //Variables to store values an pass them to the new book object 
+                        String student_id = values[0];
+                        String book_title = values[1];
+                        
+                        Queue borrowings2 = new Queue(100);
+                        String myBorrowedBook = (student_id + book_title);// Create a String
+                            
+                        if(selected_title.equals(book_title)){
+                            
+                    try{
+
+                        // Initializing BufferedWriter
+                        BufferedWriter myWriter = new BufferedWriter(new FileWriter("WaitingList.txt", true));
+                        System.out.println("Adding book to Waiting List...");
+
+                        myWriter.write("\n" + myBorrowedBook);
+
+                        // Closing BufferWriter 
+                        myWriter.close();
+                        System.out.println("Added to Waiting List.");
+
+                    }
+                    catch (IOException except)
+                    {
+                        System.out.println("Error writing this file.");
+                            
+    
+                        }
+                    }else{
+                        borrowings.Enqueue(myBorrowedBook); // adding book objects to a Queue
+                        }
+                    }
+                } catch (FileNotFoundException ex) {
+                    System.out.println("File not found");
+
+                } catch (IOException ex) {
+                    System.out.println("IOException");
+                }
+                    
                            
                     }   break;
                      
