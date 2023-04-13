@@ -49,27 +49,27 @@ public class Library {
     public static void bubbleSortTitle(ArrayList<Book> bookList){
         
          System.out.println("--List of books ordered alphabetically--");
-         int n = bookList.size();
-         
-         Book temp;
-         
+//         int n = bookList.size();
+//         
+//         Book temp = null;
+//         
 //        for (int i = 0; i < n - 1; i++) {      
 //           
 //            Book myBook2 = bookList.get(i);
 //            String sorttitle = myBook2.getBook_title().toLowerCase();
 //            
 //            for (int j = 0; j < n - i - 1; j++) {
-//            if (bookList[j].equals(bookList[j + 1])) {
+//            if (sorttitle(j).equals(sorttitle(j + 1))) {
 //                continue;
 //            }
-//            if (!bookList[j].equals(bookList[j + 1]) && bookList[j].hashCode() > boolean [j + 1].hashCode()) {
-//                temp = bookList[j];
-//                bookList[j] = bookList[j + 1];
-//                bookList[j + 1] = temp;
+//            if (!bookList.get(j).equals(bookList.get(j + 1)) && bookList.get(j).hashCode() > boolean [j + 1].hashCode()) {
+//                bookList.set(j, bookList.get(j));
+//                bookList.set(j, bookList.get(j + 1));
+//                bookList.set(j + 1, temp);
 //            }
 //        }
 //    }
-//        
+        
 //            }
 //        
 
@@ -100,6 +100,10 @@ public class Library {
            
     }
     
+    public static void bubbleSortAutor(ArrayList<Book> bookList){
+        
+    }
+    
      public static void ArraySorted(ArrayList<Book> bookList) {
                     
                     String toPrint = "[ ";
@@ -128,10 +132,50 @@ public class Library {
         return null;
     }
        
+       public static void bubbleSortName(ArrayList<Student> studentList){
+
+
+       }
+
+       public static void bubbleSortID(ArrayList<Student> studentList){
+           
+//           
+//        int n = studentList.size();
+//        for (int i = 0; i < n - 1; i++) {
+//            for (int j = 0; j < n - i - 1; j++) {
+//                Student myStudent = studentList.get(i);
+//                String ID = myStudent.studentID;
+//                if (studentList.get(j).getStudentID().compareTo(ID)(studentList.get(j+1).getStudentID() > 0) {
+//                    
+//                    Student temp = studentList.get(j);
+//                    studentList.set(j, studentList.get(j+1));
+//                    studentList.set(j+1, temp);
+//                }
+//            }
+//        }
+//    
+//        
+//        System.out.println("--Array Sorted--");
        
-       
-       
-   
+
+
+       }
+
+
+        public static void ArraySortedStudent(ArrayList<Student> studentList) {
+
+                String toPrint = "[ ";
+                for (int i = 0; i < studentList.size(); i++) {
+                 toPrint += studentList.get(i) + " ";
+
+                }
+                toPrint += "]";
+                System.out.println(toPrint);
+
+            }
+
+
+
        
     
 //           

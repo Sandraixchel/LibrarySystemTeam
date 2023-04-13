@@ -162,7 +162,7 @@ public class LibrarySystemTeam {
 
                             System.out.println("By Author Name");
                             //Calling the method
-                            //                      Library.bubbleSortName(bookList);
+                            Library.bubbleSortAutor(bookList);
 
                             // Printing the array after sorted
                             Library.ArraySorted(bookList);
@@ -190,15 +190,21 @@ public class LibrarySystemTeam {
                         if (selectedOption3 == 0) {
 
                             System.out.println("By Student Name");
+                            
                             //Calling the method
+                            Library.bubbleSortName(studentList);
 
                             // Printing the array after sorted
+                            Library.ArraySortedStudent(studentList);
                         } else if (selectedOption3 == 1) {
 
                             System.out.println("By ID");
+                            
                             //Calling the method
+                            Library.bubbleSortID(studentList);
 
                             // Printing the array after sorted
+                            Library.ArraySortedStudent(studentList);
                         } else {
 
                             System.out.println("Please enter a valid option");
