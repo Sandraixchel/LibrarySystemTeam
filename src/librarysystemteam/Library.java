@@ -48,59 +48,42 @@ public class Library {
     public static void bubbleSortTitle(ArrayList<Book> bookList){
         
          System.out.println("--List of books ordered alphabetically--");
-//         int n = bookList.size();
-//         
-//         Book temp = null;
-//         
-//        for (int i = 0; i < n - 1; i++) {      
-//           
-//            Book myBook2 = bookList.get(i);
-//            String sorttitle = myBook2.getBook_title().toLowerCase();
-//            
-//            for (int j = 0; j < n - i - 1; j++) {
-//            if (sorttitle(j).equals(sorttitle(j + 1))) {
-//                continue;
-//            }
-//            if (!bookList.get(j).equals(bookList.get(j + 1)) && bookList.get(j).hashCode() > boolean [j + 1].hashCode()) {
-//                bookList.set(j, bookList.get(j));
-//                bookList.set(j, bookList.get(j + 1));
-//                bookList.set(j + 1, temp);
-//            }
-//        }
-//    }
-        
-//            }
-//        
-
-//        do{
-//            swapped = false;
-//            for (int i = 0; i < n - 1; i++) {
-//                if(bookList.get(i).equals(bookList.get(i +1))) > 0{
-//                    swapped = true;
-//                    temp = bookList.get(i);
-//                    bookList.set(i, bookList.get(i+1));
-//                    bookList.set(i + 1,temp);
-//                }
-//                
-//            }
-//            
-//            
-//        } while(swapped);
-         
-    
-    
-    
-    
-//        public static void bubbleSortName(ArrayList<Book> bookList){
-
-//        String sortname = myBook2.getAuthor_name().toLowerCase();
-//            
-//        }
-           
+         int n = bookList.size();
+ 
+         for (int i = 0; i < n - 1; i++) {      
+       
+            for (int j = 0; j < n - i - 1; j++) {
+            if (bookList.get(j).getBook_title().compareToIgnoreCase(bookList.get(j+1).getBook_title()) > 0) {
+                
+                Book temp = bookList.get(j);
+          
+                
+                bookList.set(j,bookList.get(j+1));
+                bookList.set(j+1, temp);
+                }
+            }
+        }
+       
     }
     
-    public static void bubbleSortAutor(ArrayList<Book> bookList){
+    public static void bubbleSortAuthor(ArrayList<Book> bookList){
         
+         System.out.println("--List of books ordered alphabetically--");
+         int n = bookList.size();
+ 
+         for (int i = 0; i < n - 1; i++) {      
+       
+            for (int j = 0; j < n - i - 1; j++) {
+            if (bookList.get(j).getAuthor_name().compareToIgnoreCase(bookList.get(j+1).getAuthor_name()) > 0) {
+                
+                Book temp = bookList.get(j);
+          
+                
+                bookList.set(j,bookList.get(j+1));
+                bookList.set(j+1, temp);
+                }
+            }
+        }
     }
     
      public static void ArraySorted(ArrayList<Book> bookList) {
@@ -114,64 +97,75 @@ public class Library {
                     System.out.println(toPrint);
 
                 }
-       public static Student linearSearchStudent(ArrayList<Student> studentList, String targetStudent) {
-         
-            
-            for (int i = 0; i < studentList.size() ; i++) {
-                Student myStudent = studentList.get(i);
-                String ID = myStudent.studentID;
-                String name = myStudent.student_name.toLowerCase();// create variables to set them to lower case 
-                
-                if (ID.contains(targetStudent.toLowerCase()) || name.contains(targetStudent.toLowerCase())) 
-                    return myStudent;
-                
-               
-            }
-            
+   public static Student linearSearchStudent(ArrayList<Student> studentList, String targetStudent) {
+
+
+        for (int i = 0; i < studentList.size() ; i++) {
+            Student myStudent = studentList.get(i);
+            String ID = myStudent.studentID;
+            String name = myStudent.student_name.toLowerCase();// create variables to set them to lower case 
+
+            if (ID.contains(targetStudent.toLowerCase()) || name.contains(targetStudent.toLowerCase())) 
+                return myStudent;
+
+
+        }
+
         return null;
     }
        
-       public static void bubbleSortName(ArrayList<Student> studentList){
-
-
-       }
-
-       public static void bubbleSortID(ArrayList<Student> studentList){
-           
-//           
-//        int n = studentList.size();
-//        for (int i = 0; i < n - 1; i++) {
-//            for (int j = 0; j < n - i - 1; j++) {
-//                Student myStudent = studentList.get(i);
-//                String ID = myStudent.studentID;
-//                if (studentList.get(j).getStudentID().compareTo(ID)(studentList.get(j+1).getStudentID() > 0) {
-//                    
-//                    Student temp = studentList.get(j);
-//                    studentList.set(j, studentList.get(j+1));
-//                    studentList.set(j+1, temp);
-//                }
-//            }
-//        }
-//    
-//        
-//        System.out.println("--Array Sorted--");
+    public static void bubbleSortStudentName(ArrayList<Student> studentList){
+        
+         System.out.println("--List of books ordered alphabetically--");
+         int n = studentList.size();
+ 
+        for (int i = 0; i < n - 1; i++) {      
        
-
-
-       }
-
-
-        public static void ArraySortedStudent(ArrayList<Student> studentList) {
-
-                String toPrint = "[ ";
-                for (int i = 0; i < studentList.size(); i++) {
-                 toPrint += studentList.get(i) + " ";
-
+            for (int j = 0; j < n - i - 1; j++) {
+            if (studentList.get(j).getStudentName().compareToIgnoreCase(studentList.get(j+1).getStudentName()) > 0) {
+                
+                Student temp = studentList.get(j);
+          
+                
+                studentList.set(j,studentList.get(j+1));
+                studentList.set(j+1, temp);
                 }
-                toPrint += "]";
-                System.out.println(toPrint);
+            }
+        }
+    }
+
+    public static void bubbleSortStudentID(ArrayList<Student> studentList){
+        
+         System.out.println("--List of books ordered alphabetically--");
+         int n = studentList.size();
+ 
+        for (int i = 0; i < n - 1; i++) {      
+       
+            for (int j = 0; j < n - i - 1; j++) {//Fix with ID
+            if (studentList.get(j).getStudentID().compareToIgnoreCase(studentList.get(j+1).getStudentID()) > 0) {
+                
+                Student temp = studentList.get(j);
+          
+                
+                studentList.set(j,studentList.get(j+1));
+                studentList.set(j+1, temp);
+                }
+            }
+        }
+    }
+
+
+    public static void ArraySortedStudent(ArrayList<Student> studentList) {
+
+            String toPrint = "[ ";
+            for (int i = 0; i < studentList.size(); i++) {
+             toPrint += studentList.get(i) + " ";
 
             }
+            toPrint += "]";
+            System.out.println(toPrint);
+
+        }
 
 
 

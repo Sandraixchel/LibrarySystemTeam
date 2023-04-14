@@ -191,7 +191,7 @@ public class LibrarySystemTeam {
 
                             System.out.println("By Author Name");
                             //Calling the method
-                            Library.bubbleSortAutor(bookList);
+                            Library.bubbleSortAuthor(bookList);
 
                             // Printing the array after sorted
                             Library.ArraySorted(bookList);
@@ -221,7 +221,7 @@ public class LibrarySystemTeam {
                             System.out.println("By Student Name");
                             
                             //Calling the method
-                            Library.bubbleSortName(studentList);
+                            Library.bubbleSortStudentName(studentList);
 
                             // Printing the array after sorted
                             Library.ArraySortedStudent(studentList);
@@ -230,7 +230,7 @@ public class LibrarySystemTeam {
                             System.out.println("By ID");
                             
                             //Calling the method
-                            Library.bubbleSortID(studentList);
+                            Library.bubbleSortStudentID(studentList);
 
                             // Printing the array after sorted
                             Library.ArraySortedStudent(studentList);
