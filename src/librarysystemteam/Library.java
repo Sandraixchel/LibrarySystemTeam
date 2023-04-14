@@ -4,9 +4,7 @@
  */
 package librarysystemteam;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.util.ArrayList;
 
 
@@ -19,6 +17,7 @@ public class Library {
     //We Need to add the Array of students objects to the properties
     protected ArrayList<Book> bookList;
     protected ArrayList<Student> studentList;
+    protected ArrayList<Borrowings> borrowingList;
     
     //We Need to add student array to the paramethers to create a library object
     public Library(ArrayList<Book> bookList, ArrayList<Student> studentList){
