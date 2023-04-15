@@ -13,8 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import static librarysystemteam.Library.linearSearchBook;
+import static librarysystemteam.Library.linearSearchBorrowings;
 import static librarysystemteam.Library.linearSearchStudent;
-
+import static librarysystemteam.Library.binarySearchStudent;
 
 /**
  *
@@ -52,15 +53,14 @@ public class LibrarySystemTeam {
         } catch (IOException ex) {
             System.out.println("IOException");
         }
-        
 
         ArrayList<Student> studentList = new ArrayList<Student>();//Create a Student objects Array
         //ArrayList<int> studentIDList = new ArrayList<int>();//Create a Student objects Array
-        
+
         try ( BufferedReader myBuffer = new BufferedReader(new FileReader("test.txt"))) { //To read the file
 
             String line; // To store each line of the file
-            line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
+            //line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
 
             while ((line = myBuffer.readLine()) != null) { // while loop  to go through the file line by line until line is equals to null
                 String[] values = line.split(","); // String Array to store the separated values on the line
@@ -77,7 +77,7 @@ public class LibrarySystemTeam {
 
                 Student myStudent = new Student(studentID, firstName, lastName, gender, country, date);// Create a student object for the current line 
                 //StudentID myStudentID = new StudentID (studentID);
-                
+
                 studentList.add(myStudent); // adding student objects to ArrayList
                 //studentIDList.add(myStudent.getStudentID());
             }
@@ -87,8 +87,8 @@ public class LibrarySystemTeam {
         } catch (IOException ex) {
             System.out.println("IOException");
         }
-        
-         ArrayList<Borrowings> borrowingsList = new ArrayList<Borrowings>();//Create an borrowing object Array
+
+        ArrayList<Borrowings> borrowingsList = new ArrayList<Borrowings>();//Create an borrowing object Array
         try ( BufferedReader myBuffer = new BufferedReader(new FileReader("BorrowingList.txt"))) { //To read the file
 
             String line; // To store each line of the file
@@ -101,8 +101,8 @@ public class LibrarySystemTeam {
                 //Variables to store values an pass them to the new book object 
                 String student_id = values[0];
                 String book_title = values[1];
-                
-                Borrowings myBorrowing = new Borrowings(student_id,book_title);// Create a book object for the current line 
+
+                Borrowings myBorrowing = new Borrowings(student_id, book_title);// Create a book object for the current line 
 
                 borrowingsList.add(myBorrowing); // adding borrowing objects to ArrayList
             }
@@ -112,12 +112,11 @@ public class LibrarySystemTeam {
         } catch (IOException ex) {
             System.out.println("IOException");
         }
-        
+
         System.out.println(borrowingsList);
 
         Library myLibrary = new Library(bookList, studentList); //Creates our library with students and books arrays
 
-        
         //System.out.println(studentList); //Test to check studentArray
         //Creates an Array of options for the menu
         String[] menuOptions = {"Search for a book", "Search for a student", "List all books", "List all students", "Register borrowed books", "Register returned books", "Check student borrowings"};
@@ -149,24 +148,49 @@ public class LibrarySystemTeam {
                     Book searchedBook = linearSearchBook(bookList, selected_title_author);
                     if (searchedBook == null) {
                         System.out.println("Sorry, we couldn't find that book. Please enter a title or author name");
-                        
+
                     } else {
                         System.out.println(searchedBook);
-                        
-                    }   break;
-            //It will break out of the loop whenever the user enters a valid option
-                case 1:
-                    System.out.println("Please enter a student name or student ID");
-                    String selected_student = myScanner.nextLine();
-                    //Library.linearSearchBook(bookList, selected_title_author);
-                    Student searchedStudent = linearSearchStudent(studentList, selected_student);
-                    if (searchedStudent == null) {
-                        System.out.println("Sorry, we couldn't find that student. Please enter another student name or ID ");
-
-                    } else {
-                        System.out.println(searchedStudent);
 
                     }
+                    break;
+                //It will break out of the loop whenever the user enters a valid option
+                case 1:
+                    String[] menuOptionsSearch = {"Student name", "Student ID"};
+                    Menu menuSearch = new Menu(menuOptionsSearch);
+                    System.out.println(menuSearch.showMenu("List students by:"));
+                    boolean inputValidSearch;
+                    do {
+                        inputValidSearch = true;
+                        Scanner myKB = new Scanner(System.in);
+                        int selectedOptionSearch = myScanner.nextInt();
+                        myScanner.nextLine();
+
+                        if (selectedOptionSearch == 0) {
+
+                            System.out.println("Please enter a Student Name");
+                            String selected_student = myScanner.nextLine();
+                            //Library.linearSearchBook(bookList, selected_title_author);
+                            Student searchedStudent = linearSearchStudent(studentList, selected_student);
+                            if (searchedStudent == null) {
+                                System.out.println("Sorry, we couldn't find that student. Please enter another student name or ID ");
+
+                            } else {
+                                System.out.println(searchedStudent);
+
+                            }
+                            
+                        }
+                        
+                        if (selectedOptionSearch == 1) {
+                                System.out.println("Please enter a Student ID");
+                                int selected_ID = myScanner.nextInt();
+                                Student selected_searched_student = binarySearchStudent(studentList, 0, studentList.size(), selected_ID);
+                                System.out.println(selected_searched_student);
+                            }
+
+                    } while (inputValidSearch == false);
+
                     break;
                 case 2:
                     String[] menuOptions2 = {"Title", "Author Name"};
@@ -219,7 +243,7 @@ public class LibrarySystemTeam {
                         if (selectedOption3 == 0) {
 
                             System.out.println("By Student Name");
-                            
+
                             //Calling the method
                             Library.bubbleSortStudentName(studentList);
 
@@ -228,7 +252,7 @@ public class LibrarySystemTeam {
                         } else if (selectedOption3 == 1) {
 
                             System.out.println("By ID");
-                            
+
                             //Calling the method
                             Library.bubbleSortStudentID(studentList);
 
@@ -238,65 +262,68 @@ public class LibrarySystemTeam {
 
                             System.out.println("Please enter a valid option");
                             inputValid3 = false;
-
                         }
 
                     } while (inputValid3 == false);
-                    
+
                     break;
-                    
+
                 case 4:
-                    
-                    System.out.println("Please enter student ID"); 
+
+                    System.out.println("Please enter student ID");
                     String selected_id = myScanner.next();
                     //Library.linearSearchBook(bookList, selected_title_author);
                     Student searchedID = linearSearchStudent(studentList, selected_id);
                     if (searchedID == null) {
                         System.out.println("Sorry, we couldn't find that student. Please enter another student ID again.");
-
-                    }else {
+                    } else {
                         System.out.println(searchedID);
 
                     }
- 
+
                     System.out.println("Please enter a book title");
-                    String selected_title= myScanner.next();
+                    String selected_title = myScanner.next();
                     //Library.linearSearchBook(bookList, selected_title_author);
-                    Book searchedTitle = linearSearchBook(bookList, selected_title);
-                    if (searchedTitle == null) {
+
+                    Book searched_book_Title = linearSearchBook(bookList, selected_title);
+
+                    if (searched_book_Title == null) {
                         System.out.println("Sorry, we couldn't find that book. Please enter a book title again");
-                        
                     } else {
-                        System.out.println(searchedTitle);
+                        System.out.println(searched_book_Title);
 
+                        String checkBorrowings = linearSearchBorrowings(borrowingsList,selected_title );
+                         System.out.println("Test:" + checkBorrowings);
+                         
+                        if (searched_book_Title.book_title.equals(checkBorrowings)) { //are the titles identical? equals instead of contains in case there is another book with the same word
 
-                    String borrowed = (searchedID.studentID + "," + searchedTitle.getBook_title());//To add student ID plus title ID
-           
-                    
-                    try{
+                            System.out.println("Sorry, this book is borrowed by another student");//Then it needs to be added to a waiting list (queue)
 
-                    // Initializing BufferedWriter
-                    BufferedWriter myWriter = new BufferedWriter(new FileWriter("BorrowingList.txt", true));
-                    System.out.println("Adding book...");
+                        } else {
 
-                    myWriter.write("\n" + borrowed);
+                            String borrowed = (searchedID.studentID + "," + searched_book_Title.getBook_title());//To add student ID plus title ID
 
-                    // Closing BufferWriter 
-                    myWriter.close();
-                    System.out.println("Student has been added to borrowings.");
-                    
-                    Borrowings myBorrowing = new Borrowings(searchedID.getStudentID(),searchedTitle.getBook_title());// Create a book object for the current line to add it to the Array 
+                            try {
 
-                    borrowingsList.add(myBorrowing); // adding borrowing objects to ArrayList to have in memory while running the programme
-                    
-                    
-                    
-                }
-                catch (IOException except)
-                {
-                    System.out.println("Error writing this file.");
-                }
-                    
+                                // Initializing BufferedWriter
+                                BufferedWriter myWriter = new BufferedWriter(new FileWriter("BorrowingList.txt", true));
+                                System.out.println("Adding book...");
+
+                                myWriter.write("\n" + borrowed);
+
+                                // Closing BufferWriter 
+                                myWriter.close();
+                                System.out.println("Student has been added to borrowings.");
+
+                                Borrowings myBorrowing = new Borrowings(searchedID.getStudentID(), searched_book_Title.getBook_title());// Create a book object for the current line to add it to the Array
+
+                                borrowingsList.add(myBorrowing); // adding borrowing objects to ArrayList to have in memory while running the programme
+
+                            } catch (IOException except) {
+                                System.out.println("Error writing this file.");
+                            }
+                        }
+
 //                    try ( BufferedReader myBuffer = new BufferedReader(new FileReader("BorrowingList.txt"))) { //To read the file
 //
 //                    String line; // To store each line of the file
@@ -344,10 +371,9 @@ public class LibrarySystemTeam {
 //                } catch (IOException ex) {
 //                    System.out.println("IOException");
 //                }
-                    
-                           
-                    }   break;
-                     
+                    }
+                    break;
+
                 default:
                     System.out.println("Please enter a valid option");
                     //Set the boolean to false so the loop keeps going until the userInput is valid
@@ -355,12 +381,7 @@ public class LibrarySystemTeam {
                     break;
             }
 
-            }while (inputValid == false);
-           
+        } while (inputValid == false);
 
-        } 
     }
-
-
-
-
+}

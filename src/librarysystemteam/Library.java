@@ -44,6 +44,52 @@ public class Library {
             
         return null;
     }
+    public static Student linearSearchStudent(ArrayList<Student> studentList, String targetStudent) {
+
+
+        for (int i = 0; i < studentList.size() ; i++) {
+            Student myStudent = studentList.get(i);
+            String ID = myStudent.studentID;
+            String name = myStudent.student_name.toLowerCase();// create variables to set them to lower case 
+
+            if (ID.contains(targetStudent.toLowerCase()) || name.contains(targetStudent.toLowerCase())) //ID.contains(targetStudent.toLowerCase()) ||
+                return myStudent;
+
+
+        }
+
+        return null;
+    }
+    public static Student binarySearchStudent(ArrayList<Student> studentList,int first, int last, int studentIDsearch){
+           
+       
+        //System.out.println("Sorted Array: " + studentList);
+        
+       
+        int mid = (first+last)/2;
+        
+        while (first <= last){
+            if (Integer.parseInt(studentList.get(mid).getStudentID()) < studentIDsearch){ //change them to ints
+            first = mid +1;
+            
+        }else if(Integer.parseInt(studentList.get(mid).getStudentID()) == studentIDsearch ){
+                
+            System.out.println("Element is found at index: " + mid);
+            
+            return studentList.get(mid);
+        
+        }else {
+            last = mid -1;
+        
+        }
+            mid = (first + last)/2;
+        }
+        if (first>last){
+            System.out.println("Element is not found");
+        }
+        return null;
+       
+       }
     
     public static void bubbleSortTitle(ArrayList<Book> bookList){
         
@@ -97,22 +143,7 @@ public class Library {
                     System.out.println(toPrint);
 
                 }
-   public static Student linearSearchStudent(ArrayList<Student> studentList, String targetStudent) {
-
-
-        for (int i = 0; i < studentList.size() ; i++) {
-            Student myStudent = studentList.get(i);
-            String ID = myStudent.studentID;
-            String name = myStudent.student_name.toLowerCase();// create variables to set them to lower case 
-
-            if (ID.contains(targetStudent.toLowerCase()) || name.contains(targetStudent.toLowerCase())) 
-                return myStudent;
-
-
-        }
-
-        return null;
-    }
+   
        
     public static void bubbleSortStudentName(ArrayList<Student> studentList){
         
@@ -166,6 +197,21 @@ public class Library {
             System.out.println(toPrint);
 
         }
+    public static String linearSearchBorrowings(ArrayList<Borrowings> borrowingsList, String targetBorrowing) {
+         
+            
+            for (int i = 0; i < borrowingsList.size() ; i++) {
+                Borrowings myBorrowing = borrowingsList.get(i);
+                String title = myBorrowing.bookTitle.toLowerCase();// create variables to set them to lower case 
+                //String name = myBorrowing.studentID.toLowerCase();
+                
+                if (title.contains(targetBorrowing.toLowerCase())) //|| name.contains(targetBorrowing)
+                    return myBorrowing.bookTitle;
+            }
+            
+        return null;
+    }
+    
 
 
 
@@ -231,7 +277,7 @@ public class Library {
        
        
        
-//       public static int binarySearchStudent(ArrayList<Student> studentList,int first, int last, int studentTarget){
+//       public Student binarySearchStudent(ArrayList<Student> studentList,int first, int last, int studentIDsearch){
 //           
 //       
 //        System.out.println("Sorted Array: " + studentList);
@@ -244,6 +290,7 @@ public class Library {
 //            first = mid + 1;
 //            
 //        }else if(studentList.get(mid).getStudentID() == studentTarget ){
+                //return studentList.get(mid);
 //            System.out.println("Element is found at index: " + mid);
 //        
 //        break;
@@ -257,7 +304,7 @@ public class Library {
 //        if (first>last){
 //            System.out.println("Element is not found");
 //        }
-//        return -1;
+//        return null;
 //       
 //       }
     
