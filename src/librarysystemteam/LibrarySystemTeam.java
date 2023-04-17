@@ -23,8 +23,10 @@ import static librarysystemteam.Library.binarySearchStudent;
  */
 public class LibrarySystemTeam {
 
+    
     //@SuppressWarnings("empty-statement")
     public static void main(String[] args) {
+        ArrayList<WaitingList> waitingLists = new ArrayList<>();
 
         ArrayList<Book> bookList = new ArrayList<Book>();//Create an Book objects Array
         try ( BufferedReader myBuffer = new BufferedReader(new FileReader("MOCK_DATA.csv"))) { //To read the file
@@ -123,15 +125,15 @@ public class LibrarySystemTeam {
 
         //To create a menu object with the menuOptions Array
         Menu menuLibrary = new Menu(menuOptions);
-
-        //Calls the showMenu method from the menu class and out prints it
-        System.out.println(menuLibrary.showMenu("Library System Menu"));
+        
 
         boolean inputValid;
 
         do {
             //Set the boolean variable as true so the loop can stop running when the userInput is a valid option
-            inputValid = true;
+            inputValid = true;            
+            //Calls the showMenu method from the menu class and out prints it
+            System.out.println(menuLibrary.showMenu("Library System Menu"));
 
             //To read the user Input
             Scanner myScanner = new Scanner(System.in);
@@ -297,8 +299,16 @@ public class LibrarySystemTeam {
                          
                         if (searched_book_Title.book_title.equals(checkBorrowings)) { //are the titles identical? equals instead of contains in case there is another book with the same word
 
-                            System.out.println("Sorry, this book is borrowed by another student");//Then it needs to be added to a waiting list (queue)
-
+                            System.out.println("Sorry, this book is borrowed by another student.");//Then it needs to be added to a waiting list (queue)
+                            // Adding to queue
+                            myLibrary.addWaitingList(waitingLists, searched_book_Title, selected_id);
+                            
+                            System.out.println("Student " + selected_id + "added to Waiting List.");
+                            
+                            for (WaitingList waitingList : waitingLists) {
+                                System.out.println(waitingList.getBook().book_title + " " + waitingList.getQueue());
+                            }
+                            
                         } else {
 
                             String borrowed = (searchedID.studentID + "," + searched_book_Title.getBook_title());//To add student ID plus title ID
@@ -372,7 +382,22 @@ public class LibrarySystemTeam {
 //                    System.out.println("IOException");
 //                }
                     }
-                    break;
+                    break;      
+                case 5:
+                    System.out.println("Borrowings");
+                    System.out.println(borrowingsList);
+                    // regresar libro  -->  id est y nombre libro
+                    System.out.println("Enter ID and Title:");
+                    String studentID = "20";
+                    String booktTitle = "Tarzan's Magic Fountain";
+                    myScanner.nextLine();
+                    Borrowings example = new Borrowings(studentID, booktTitle);
+                    borrowingsList = myLibrary.regresarLibro(example, borrowingsList);
+                    System.out.println(borrowingsList);
+                    
+                    String siguiente = myLibrary.followingWaitingList(waitingLists, booktTitle);
+                    System.out.println("El siguiente :" + siguiente );
+                    break;    
 
                 default:
                     System.out.println("Please enter a valid option");
@@ -381,7 +406,7 @@ public class LibrarySystemTeam {
                     break;
             }
 
-        } while (inputValid == false);
+        } while (inputValid != false);
 
     }
 }

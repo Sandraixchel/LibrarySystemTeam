@@ -93,7 +93,7 @@ public class Library {
     
     public static void bubbleSortTitle(ArrayList<Book> bookList){
         
-         System.out.println("--List of books ordered alphabetically--");
+         System.out.println("--List of books ordered alphabetically by Title--");
          int n = bookList.size();
  
          for (int i = 0; i < n - 1; i++) {      
@@ -114,7 +114,7 @@ public class Library {
     
     public static void bubbleSortAuthor(ArrayList<Book> bookList){
         
-         System.out.println("--List of books ordered alphabetically--");
+         System.out.println("--List of books ordered alphabetically by Author--");
          int n = bookList.size();
  
          for (int i = 0; i < n - 1; i++) {      
@@ -147,7 +147,7 @@ public class Library {
        
     public static void bubbleSortStudentName(ArrayList<Student> studentList){
         
-         System.out.println("--List of books ordered alphabetically--");
+         System.out.println("--List of students ordered alphabetically by Student Name--");
          int n = studentList.size();
  
         for (int i = 0; i < n - 1; i++) {      
@@ -167,7 +167,7 @@ public class Library {
 
     public static void bubbleSortStudentID(ArrayList<Student> studentList){
         
-         System.out.println("--List of books ordered alphabetically--");
+         System.out.println("--List of students ordered by student ID");
          int n = studentList.size();
  
         for (int i = 0; i < n - 1; i++) {      
@@ -210,6 +210,38 @@ public class Library {
             }
             
         return null;
+        
+        
+    }
+    
+    
+    public String followingWaitingList(ArrayList<WaitingList> waitingList, String bookTitle ){
+        for (int i = 0; i < waitingList.size(); i++) {
+            if(waitingList.get(i).getBook().book_title.equalsIgnoreCase(bookTitle)){
+                // A waiting List exists
+                return waitingList.get(i).getQueue().Dequeue();
+                
+            }
+            
+        }
+        return null;
+    }
+    
+    public boolean addWaitingList(ArrayList<WaitingList> waitingList, Book book, String StudentID){
+        for (int i = 0; i < waitingList.size(); i++) {
+            if(waitingList.get(i).getBook().book_title.equalsIgnoreCase(book.getBook_title())){
+                // adding to waiting List
+                waitingList.get(i).getQueue().Enqueue(StudentID);
+
+                return true;
+            }
+            
+        }
+        
+        Queue tmp = new Queue(10);
+        tmp.Enqueue(StudentID);
+        waitingList.add(new WaitingList(book, tmp));
+        return true;
     }
     
 
@@ -242,6 +274,10 @@ public class Library {
 //            }
 //
 //        }
+
+    ArrayList<Borrowings> regresarLibro(Borrowings ejemplo, ArrayList<Borrowings> borrowingsList) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
 
            
