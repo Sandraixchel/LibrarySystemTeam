@@ -224,7 +224,7 @@ public class Library {
             }
             
         }
-        return null;
+        return bookTitle;
     }
     
     public boolean addWaitingList(ArrayList<WaitingList> waitingList, Book book, String StudentID){
@@ -244,7 +244,26 @@ public class Library {
         return true;
     }
     
-
+        public ArrayList<Borrowings> returnBook(Borrowings toSearch, ArrayList<Borrowings> borrowed){
+        boolean found = false;
+        for (int i = 0; i < borrowed.size(); i++) {
+            if(borrowed.get(i).studentID.equalsIgnoreCase(toSearch.studentID)
+                    && borrowed.get(i).bookTitle.equalsIgnoreCase(toSearch.bookTitle)
+                    ){
+                System.out.println("Returning...");
+                borrowed.remove(i);
+                found = true;
+                break;
+            }
+            
+        }
+        if(found == false){
+            System.out.println("Book not found.");
+        }
+        
+        return borrowed;
+    }
+}
 
 
        
@@ -275,10 +294,7 @@ public class Library {
 //
 //        }
 
-    ArrayList<Borrowings> regresarLibro(Borrowings ejemplo, ArrayList<Borrowings> borrowingsList) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-}
+ 
 
            
           // BufferedWriter myWriter = new BufferedWriter(new FileWriter(<BorrowingList.txt>, true));

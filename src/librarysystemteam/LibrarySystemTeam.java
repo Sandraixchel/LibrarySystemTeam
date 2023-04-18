@@ -386,17 +386,21 @@ public class LibrarySystemTeam {
                 case 5:
                     System.out.println("Borrowings");
                     System.out.println(borrowingsList);
-                    // regresar libro  -->  id est y nombre libro
-                    System.out.println("Enter ID and Title:");
-                    String studentID = "20";
-                    String booktTitle = "Tarzan's Magic Fountain";
-                    myScanner.nextLine();
-                    Borrowings example = new Borrowings(studentID, booktTitle);
-                    borrowingsList = myLibrary.regresarLibro(example, borrowingsList);
+                    // return book  -->  id student and book title
+                    System.out.println("Enter ID:");
+                    String studentID = myScanner.nextLine();
+                    
+                    System.out.println("Enter Title:");
+                    String bookTitle = myScanner.nextLine();
+                    
+                    
+                    
+                    Borrowings example = new Borrowings(studentID, bookTitle);
+                    borrowingsList = myLibrary.returnBook(example, borrowingsList);
                     System.out.println(borrowingsList);
                     
-                    String siguiente = myLibrary.followingWaitingList(waitingLists, booktTitle);
-                    System.out.println("El siguiente :" + siguiente );
+                    String following = myLibrary.followingWaitingList(waitingLists, bookTitle);
+                    System.out.println("Following :" + following );
                     break;    
 
                 default:
