@@ -1,15 +1,2 @@
-Student,Book Title
-19,Lust for Love
-23,Hot Lead and Cold Feet
-45,"Day of the Beast
-34,Lust for Love
-34,Lust for Love
-23,Lust for Love
-567,Lust for Love
-45,Lust for Love
-45,Lust for Love
-45,Lust for Love
-34,Lust for Love
+Student ID,Book Title
 56,Lust for Love
-22,Vamps
-57,Gunless

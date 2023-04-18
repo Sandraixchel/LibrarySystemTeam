@@ -115,7 +115,7 @@ public class LibrarySystemTeam {
             System.out.println("IOException");
         }
 
-        System.out.println(borrowingsList);
+        //System.out.println(borrowingsList);
 
         Library myLibrary = new Library(bookList, studentList); //Creates our library with students and books arrays
 
@@ -295,7 +295,7 @@ public class LibrarySystemTeam {
                         System.out.println(searched_book_Title);
 
                         String checkBorrowings = linearSearchBorrowings(borrowingsList,selected_title );
-                         System.out.println("Test:" + checkBorrowings);
+                         //System.out.println("Test:" + checkBorrowings);
                          
                         if (searched_book_Title.book_title.equals(checkBorrowings)) { //are the titles identical? equals instead of contains in case there is another book with the same word
 
@@ -303,11 +303,12 @@ public class LibrarySystemTeam {
                             // Adding to queue
                             myLibrary.addWaitingList(waitingLists, searched_book_Title, selected_id);
                             
-                            System.out.println("Student " + selected_id + "added to Waiting List.");
+                            System.out.println("Student " + selected_id + " added to Waiting List.");
                             
                             for (WaitingList waitingList : waitingLists) {
                                 System.out.println(waitingList.getBook().book_title + " " + waitingList.getQueue());
                             }
+                                    
                             
                         } else {
 
@@ -393,21 +394,31 @@ public class LibrarySystemTeam {
                     System.out.println("Enter Title:");
                     String bookTitle = myScanner.nextLine();
                     
+                    //Borrowings example = new Borrowings(studentID, bookTitle);
+                    //borrowingsList = myLibrary.returnBook(example, borrowingsList);
                     
-                    
-                    Borrowings example = new Borrowings(studentID, bookTitle);
-                    borrowingsList = myLibrary.returnBook(example, borrowingsList);
+                    //Calls in the returnBook method
+                    borrowingsList = myLibrary.returnBook(studentID, bookTitle, borrowingsList);
                     System.out.println(borrowingsList);
                     
                     String following = myLibrary.followingWaitingList(waitingLists, bookTitle);
                     System.out.println("Following :" + following );
+                    
+                    myLibrary.rewriteBorrowingsToFile(borrowingsList);//Method to rewrite borrowings into the txt file excluding the book that was just returned
+                    
                     break;    
 
+                   
+                case 6:
+                    System.out.println("Please enter student ID:");
+                    String student_ID = myScanner.nextLine();
+                
                 default:
                     System.out.println("Please enter a valid option");
                     //Set the boolean to false so the loop keeps going until the userInput is valid
                     inputValid = false;
                     break;
+                    
             }
 
         } while (inputValid != false);

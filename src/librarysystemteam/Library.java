@@ -5,7 +5,12 @@
 package librarysystemteam;
 
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -244,14 +249,14 @@ public class Library {
         return true;
     }
     
-        public ArrayList<Borrowings> returnBook(Borrowings toSearch, ArrayList<Borrowings> borrowed){
+        public ArrayList<Borrowings> returnBook(String searched_studentID, String searched_bookTitle, ArrayList<Borrowings> borrowingsList){
         boolean found = false;
-        for (int i = 0; i < borrowed.size(); i++) {
-            if(borrowed.get(i).studentID.equalsIgnoreCase(toSearch.studentID)
-                    && borrowed.get(i).bookTitle.equalsIgnoreCase(toSearch.bookTitle)
+        for (int i = 0; i < borrowingsList.size(); i++) {
+            if(borrowingsList.get(i).studentID.equalsIgnoreCase(searched_studentID)
+                    && borrowingsList.get(i).bookTitle.toLowerCase().contains(searched_bookTitle.toLowerCase())
                     ){
                 System.out.println("Returning...");
-                borrowed.remove(i);
+                borrowingsList.remove(i);
                 found = true;
                 break;
             }
@@ -261,8 +266,32 @@ public class Library {
             System.out.println("Book not found.");
         }
         
-        return borrowed;
+        return borrowingsList;
     }
+   public void rewriteBorrowingsToFile(ArrayList<Borrowings> borrowingsList){ //To rewrite the whole filw with the current borrowings list, use when returning a borrowing
+       
+          
+        try {
+            
+            BufferedWriter myWriter;
+            myWriter = new BufferedWriter(new FileWriter("BorrowingList.txt", false));
+            myWriter.write("Student ID,Book Title");
+            
+            for(Borrowings borrowed : borrowingsList ){ //To go through the borrowings list Array one by one
+                
+            myWriter.write("\n" +borrowed.studentID + ","+ borrowed.bookTitle);
+            
+            }           
+          myWriter.close();// Closing BufferWriter
+        } catch (IOException ex) {
+            Logger.getLogger(Library.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          System.out.println("Adding book...");
+          
+         
+   
+   }
+   
 }
 
 
