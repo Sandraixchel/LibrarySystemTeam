@@ -316,12 +316,16 @@ public class Library {
    
    public void listStudentBorrowings(ArrayList<Borrowings> borrowingsList, String searchedStudent){
         
-       
+        //System.out.println("The student:" + searchedStudent + " has borrowed: ");
+        
        for (Borrowings studentBorrowings : borrowingsList){ //Creates a loop to go through the borrowings List line by line 
        
            if(searchedStudent.equals(studentBorrowings.studentID)){ //if the user input is equals to the a student ID in our Borrowings List it will print the Book title
                
                System.out.println("The student:" + studentBorrowings.studentID + " has borrowed: " + studentBorrowings.bookTitle);
+           }else{
+           
+           
            }
            
        
