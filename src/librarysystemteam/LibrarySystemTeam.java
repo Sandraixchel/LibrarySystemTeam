@@ -26,7 +26,7 @@ public class LibrarySystemTeam {
     
     //@SuppressWarnings("empty-statement")
     public static void main(String[] args) {
-        ArrayList<WaitingList> waitingLists = new ArrayList<>();
+        
 
         ArrayList<Book> bookList = new ArrayList<Book>();//Create an Book objects Array
         try ( BufferedReader myBuffer = new BufferedReader(new FileReader("MOCK_DATA.csv"))) { //To read the file
@@ -115,7 +115,8 @@ public class LibrarySystemTeam {
             System.out.println("IOException");
         }
         
-        //ArrayList<WaitingList> waitingList = new ArrayList<WaitingList>();//creates an arraylist for waiting list
+        ArrayList<WaitingList> waitingLists = new ArrayList<>();
+//        //ArrayList<WaitingList> waitingList = new ArrayList<WaitingList>();//creates an arraylist for waiting list
 //         try ( BufferedReader myBuffer = new BufferedReader(new FileReader("WaitingList.txt"))) { //To read the file
 //
 //            String line; // To store each line of the file
@@ -128,10 +129,11 @@ public class LibrarySystemTeam {
 //                //Variables to store values an pass them to the new book object 
 //                String student_id = values[0];
 //                String book_title = values[1];
+//                Queue myQ = new Queue(100);
 //
-//                WaitingList myWaitingList = new WaitingList(student_id, book_title);// Create a book object for the current line 
+//                WaitingList myWaitingList = new WaitingList(student_id,book_title, myQ);// Create a book object for the current line 
 //
-//                borrowingsList.add(myBorrowing); // adding borrowing objects to ArrayList
+//                waitingLists.add(myWaitingList); // adding borrowing objects to ArrayList
 //            }
 //        } catch (FileNotFoundException ex) {
 //            System.out.println("File not found");
