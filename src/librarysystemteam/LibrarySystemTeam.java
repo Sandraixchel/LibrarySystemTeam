@@ -447,12 +447,13 @@ public class LibrarySystemTeam {
                     myLibrary.listStudentBorrowings(borrowingsList, searchedStudent);
                     
                 
-                default:
+                    break;
+                    
+                   default:
                     System.out.println("Please enter a valid option");
                     //Set the boolean to false so the loop keeps going until the userInput is valid
                    
                     inputValid = true;
-                    break;
                     
             }
 
