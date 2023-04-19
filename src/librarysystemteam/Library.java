@@ -23,6 +23,7 @@ public class Library {
     protected ArrayList<Book> bookList;
     protected ArrayList<Student> studentList;
     protected ArrayList<Borrowings> borrowingList;
+    protected ArrayList<WaitingList> waitingList;
     
     //We Need to add student array to the paramethers to create a library object
     public Library(ArrayList<Book> bookList, ArrayList<Student> studentList){
@@ -79,7 +80,7 @@ public class Library {
             
         }else if(Integer.parseInt(studentList.get(mid).getStudentID()) == studentIDsearch ){
                 
-            System.out.println("Element is found at index: " + mid);
+            //System.out.println("Element is found at index: " + mid);
             
             return studentList.get(mid);
         
@@ -220,16 +221,17 @@ public class Library {
     }
     
     
-    public String followingWaitingList(ArrayList<WaitingList> waitingList, String bookTitle ){
+    public void followingWaitingList(ArrayList<WaitingList> waitingList, String bookTitle){
         for (int i = 0; i < waitingList.size(); i++) {
             if(waitingList.get(i).getBook().book_title.equalsIgnoreCase(bookTitle)){
                 // A waiting List exists
-                return waitingList.get(i).getQueue().Dequeue();
+               String following_student = waitingList.get(i).getQueue().Dequeue();
+               System.out.println("Following student:" + following_student);
                 
             }
             
         }
-        return bookTitle;
+        //return following_student;
     }
     
     public boolean addWaitingList(ArrayList<WaitingList> waitingList, Book book, String StudentID){
@@ -243,9 +245,9 @@ public class Library {
             
         }
         
-        Queue tmp = new Queue(10);
-        tmp.Enqueue(StudentID);
-        waitingList.add(new WaitingList(book, tmp));
+                            Queue waiting_list = new Queue(100);
+                            waiting_list.Enqueue(StudentID);
+                            waitingList.add(new WaitingList(book));
         return true;
     }
     
@@ -255,7 +257,7 @@ public class Library {
             if(borrowingsList.get(i).studentID.equalsIgnoreCase(searched_studentID)
                     && borrowingsList.get(i).bookTitle.toLowerCase().contains(searched_bookTitle.toLowerCase())
                     ){
-                System.out.println("Returning...");
+                System.out.println("This book has been returned");
                 borrowingsList.remove(i);
                 found = true;
                 break;
@@ -275,7 +277,7 @@ public class Library {
             
             BufferedWriter myWriter;
             myWriter = new BufferedWriter(new FileWriter("BorrowingList.txt", false));
-            myWriter.write("Student ID,Book Title");
+            myWriter.write("ID,Book Title");
             
             for(Borrowings borrowed : borrowingsList ){ //To go through the borrowings list Array one by one
                 
@@ -287,70 +289,58 @@ public class Library {
             Logger.getLogger(Library.class.getName()).log(Level.SEVERE, null, ex);
         }
           System.out.println("Adding book...");
-          
-         
+     
+   }
+   
+   public void writeWaitingList(ArrayList<WaitingList> waitingList){ //Needs to be fixed
+   
+   
+       try {
+            
+            BufferedWriter myWriter;
+            myWriter = new BufferedWriter(new FileWriter("WaitingList.txt", true));
+            myWriter.write("ID,Book Title");
+            
+            for(WaitingList nextWaiting : waitingList ){ //To go through the borrowings list Array one by one
+                
+           // myWriter.write("\n" +nextWaiting. + ","+ borrowed.bookTitle);
+            
+            }           
+          myWriter.close();// Closing BufferWriter
+        } catch (IOException ex) {
+            Logger.getLogger(Library.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          System.out.println("Adding book...");
    
    }
+   
+   public void listStudentBorrowings(ArrayList<Borrowings> borrowingsList, String searchedStudent){
+        
+       
+       for (Borrowings studentBorrowings : borrowingsList){ //Creates a loop to go through the borrowings List line by line 
+       
+           if(searchedStudent.equals(studentBorrowings.studentID)){ //if the user input is equals to the a student ID in our Borrowings List it will print the Book title
+               
+               System.out.println("The student:" + studentBorrowings.studentID + " has borrowed: " + studentBorrowings.bookTitle);
+           }
+           
+       
+       
+       }
+       
+   
+   
+   }
+   
    
 }
 
 
        
     
-//           
-//        public void addBorrowing(String file){   
-//           
-//           
-//            try
-//            {
-//                
-//                // Initializing BufferedWriter
-//                BufferedWriter myWriter = new BufferedWriter(new FileWriter("BorrowingList.txt"));
-//                System.out.println("Adding book...");
-//                
-//                myWriter.write(borrowed);
-//                
-//               
-//
-//                // Closing BufferWriter 
-//                myWriter.close();
-//                System.out.println("Student has been added to borrowings.");
-//            }
-//            catch (IOException except)
-//            {
-//                System.out.println("Error writing this file.");
-//            }
-//
-//        }
-
  
 
            
-          // BufferedWriter myWriter = new BufferedWriter(new FileWriter(<BorrowingList.txt>, true));
-           
-//           String data = "This is the data in the output file";
-//
-//            try {
-//                
-//             // Creates a FileWriter
-//              FileWriter file = new FileWriter("BorrowingList.txt");
-//
-//                
-//              // Creates a BufferedWriter
-//              BufferedWriter myWriter = new BufferedWriter("BorrowingList.txt");
-//
-//              // Writes the string to the file
-//              myWriter.write(data);
-//
-//              // Closes the writer
-//              myWriter.close();
-//            }
-//
-//            catch (Exception e) {
-//              e.getStackTrace();
-//            }
-           
-           
        
        
        
@@ -358,36 +348,6 @@ public class Library {
        
        
        
-//       public Student binarySearchStudent(ArrayList<Student> studentList,int first, int last, int studentIDsearch){
-//           
-//       
-//        System.out.println("Sorted Array: " + studentList);
-//        
-//       
-//        int mid = (first+last)/2;
-//        
-//        while (first <= last){
-//            if (studentList.get(mid).getStudentID() < studentTarget){
-//            first = mid + 1;
-//            
-//        }else if(studentList.get(mid).getStudentID() == studentTarget ){
-                //return studentList.get(mid);
-//            System.out.println("Element is found at index: " + mid);
-//        
-//        break;
-//        
-//        }else {
-//            last = mid -1;
-//        
-//        }
-//            mid = (first + last)/2;
-//        }
-//        if (first>last){
-//            System.out.println("Element is not found");
-//        }
-//        return null;
-//       
-//       }
     
     
 

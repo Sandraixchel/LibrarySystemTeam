@@ -10,6 +10,8 @@ package librarysystemteam;
  */
 public class WaitingList {
     
+   // private String studentID;
+    //private String bookTitle;
     private Book book;
     private Queue queue;
 

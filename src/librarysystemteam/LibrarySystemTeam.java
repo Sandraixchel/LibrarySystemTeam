@@ -114,6 +114,31 @@ public class LibrarySystemTeam {
         } catch (IOException ex) {
             System.out.println("IOException");
         }
+        
+        //ArrayList<WaitingList> waitingList = new ArrayList<WaitingList>();//creates an arraylist for waiting list
+//         try ( BufferedReader myBuffer = new BufferedReader(new FileReader("WaitingList.txt"))) { //To read the file
+//
+//            String line; // To store each line of the file
+//            line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
+//
+//            while ((line = myBuffer.readLine()) != null) { // while loop  to go through the file line by line until line is equals to null
+//                String[] values = line.split(","); // String Array to store the separated values on the line
+//                //System.out.println(values[1]) Test;
+//
+//                //Variables to store values an pass them to the new book object 
+//                String student_id = values[0];
+//                String book_title = values[1];
+//
+//                WaitingList myWaitingList = new WaitingList(student_id, book_title);// Create a book object for the current line 
+//
+//                borrowingsList.add(myBorrowing); // adding borrowing objects to ArrayList
+//            }
+//        } catch (FileNotFoundException ex) {
+//            System.out.println("File not found");
+//
+//        } catch (IOException ex) {
+//            System.out.println("IOException");
+//        }
 
         //System.out.println(borrowingsList);
 
@@ -303,10 +328,14 @@ public class LibrarySystemTeam {
                             // Adding to queue
                             myLibrary.addWaitingList(waitingLists, searched_book_Title, selected_id);
                             
+//                            Queue waiting_list = new Queue(100);
+//                            waiting_list.Enqueue(selected_id);
+//                            waitingList.add(new WaitingList(searched_book_Title, waiting_list));
+                            
                             System.out.println("Student " + selected_id + " added to Waiting List.");
                             
-                            for (WaitingList waitingList : waitingLists) {
-                                System.out.println(waitingList.getBook().book_title + " " + waitingList.getQueue());
+                            for (WaitingList waitingList2 : waitingLists) {
+                                System.out.println("The waiting list for the book " + waitingList2.getBook().book_title + " is(Student ID's):  " + waitingList2.getQueue());
                             }
                                     
                             
@@ -401,8 +430,8 @@ public class LibrarySystemTeam {
                     borrowingsList = myLibrary.returnBook(studentID, bookTitle, borrowingsList);
                     System.out.println(borrowingsList);
                     
-                    String following = myLibrary.followingWaitingList(waitingLists, bookTitle);
-                    System.out.println("Following :" + following );
+                    myLibrary.followingWaitingList(waitingLists, bookTitle);
+                    //System.out.println("Following :" + following_student );
                     
                     myLibrary.rewriteBorrowingsToFile(borrowingsList);//Method to rewrite borrowings into the txt file excluding the book that was just returned
                     
@@ -411,12 +440,16 @@ public class LibrarySystemTeam {
                    
                 case 6:
                     System.out.println("Please enter student ID:");
-                    String student_ID = myScanner.nextLine();
+                    String searchedStudent = myScanner.nextLine();
+                    
+                    myLibrary.listStudentBorrowings(borrowingsList, searchedStudent);
+                    
                 
                 default:
                     System.out.println("Please enter a valid option");
                     //Set the boolean to false so the loop keeps going until the userInput is valid
-                    inputValid = false;
+                   
+                    inputValid = true;
                     break;
                     
             }

@@ -22,6 +22,15 @@ public class Borrowings {
     
     }
 
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
+    }
+    
+
     public void setStudentID(String studentID) {
         this.studentID = studentID;
     }
