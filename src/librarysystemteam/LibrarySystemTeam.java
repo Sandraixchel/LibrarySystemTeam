@@ -28,123 +28,18 @@ public class LibrarySystemTeam {
     public static void main(String[] args) {
         
 
-        ArrayList<Book> bookList = new ArrayList<Book>();//Create an Book objects Array
-        try ( BufferedReader myBuffer = new BufferedReader(new FileReader("MOCK_DATA.csv"))) { //To read the file
+        DataLoader fileLoader = new DataLoader();
+        
+        ArrayList<Book> bookList = fileLoader.loadBooks() ;//Create an Book objects Array
 
-            String line; // To store each line of the file
-            line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
-
-            while ((line = myBuffer.readLine()) != null) { // while loop  to go through the file line by line until line is equals to null
-                String[] values = line.split(","); // String Array to store the separated values on the line
-                //System.out.println(values[1]) Test;
-
-                //Variables to store values an pass them to the new book object 
-                String id = values[0];
-                String author_first = values[1];
-                String author_last = values[2];
-                String book_title = values[3];
-                String genre = values[4];
-
-                Book myBook = new Book(id, author_first, author_last, book_title, genre);// Create a book object for the current line 
-
-                bookList.add(myBook); // adding book objects to ArrayList
-            }
-        } catch (FileNotFoundException ex) {
-            System.out.println("File not found");
-
-        } catch (IOException ex) {
-            System.out.println("IOException");
-        }
-
-        ArrayList<Student> studentList = new ArrayList<Student>();//Create a Student objects Array
+        ArrayList<Student> studentList = fileLoader.loadStudent();//Create a Student objects Array
         //ArrayList<int> studentIDList = new ArrayList<int>();//Create a Student objects Array
 
-        try ( BufferedReader myBuffer = new BufferedReader(new FileReader("test.txt"))) { //To read the file
-
-            String line; // To store each line of the file
-            //line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
-
-            while ((line = myBuffer.readLine()) != null) { // while loop  to go through the file line by line until line is equals to null
-                String[] values = line.split(","); // String Array to store the separated values on the line
-                //System.out.println(values[1]) Test;
-
-                //Variables to store values an pass them to the new book object 
-                String studentID = values[0]; //Convert String to int
-                //int studentID = Integer.parseInt(values[0]); //Convert String to int
-                String firstName = values[1];
-                String lastName = values[2];
-                String gender = values[3];
-                String country = values[4];
-                String date = values[5];
-
-                Student myStudent = new Student(studentID, firstName, lastName, gender, country, date);// Create a student object for the current line 
-                //StudentID myStudentID = new StudentID (studentID);
-
-                studentList.add(myStudent); // adding student objects to ArrayList
-                //studentIDList.add(myStudent.getStudentID());
-            }
-        } catch (FileNotFoundException ex) {
-            System.out.println("File not found");
-
-        } catch (IOException ex) {
-            System.out.println("IOException");
-        }
-
-        ArrayList<Borrowings> borrowingsList = new ArrayList<Borrowings>();//Create an borrowing object Array
-        try ( BufferedReader myBuffer = new BufferedReader(new FileReader("BorrowingList.txt"))) { //To read the file
-
-            String line; // To store each line of the file
-            line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
-
-            while ((line = myBuffer.readLine()) != null) { // while loop  to go through the file line by line until line is equals to null
-                String[] values = line.split(","); // String Array to store the separated values on the line
-                //System.out.println(values[1]) Test;
-
-                //Variables to store values an pass them to the new book object 
-                String student_id = values[0];
-                String book_title = values[1];
-
-                Borrowings myBorrowing = new Borrowings(student_id, book_title);// Create a book object for the current line 
-
-                borrowingsList.add(myBorrowing); // adding borrowing objects to ArrayList
-            }
-        } catch (FileNotFoundException ex) {
-            System.out.println("File not found");
-
-        } catch (IOException ex) {
-            System.out.println("IOException");
-        }
+        ArrayList<Borrowings> borrowingsList = fileLoader.loadBorrowings();
         
-        ArrayList<WaitingList> waitingLists = new ArrayList<>();
-//        //ArrayList<WaitingList> waitingList = new ArrayList<WaitingList>();//creates an arraylist for waiting list
-//         try ( BufferedReader myBuffer = new BufferedReader(new FileReader("WaitingList.txt"))) { //To read the file
-//
-//            String line; // To store each line of the file
-//            line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
-//
-//            while ((line = myBuffer.readLine()) != null) { // while loop  to go through the file line by line until line is equals to null
-//                String[] values = line.split(","); // String Array to store the separated values on the line
-//                //System.out.println(values[1]) Test;
-//
-//                //Variables to store values an pass them to the new book object 
-//                String student_id = values[0];
-//                String book_title = values[1];
-//                Queue myQ = new Queue(100);
-//
-//                WaitingList myWaitingList = new WaitingList(student_id,book_title, myQ);// Create a book object for the current line 
-//
-//                waitingLists.add(myWaitingList); // adding borrowing objects to ArrayList
-//            }
-//        } catch (FileNotFoundException ex) {
-//            System.out.println("File not found");
-//
-//        } catch (IOException ex) {
-//            System.out.println("IOException");
-//        }
+        ArrayList<WaitingList> waitingLists = new ArrayList<>();  
 
-        //System.out.println(borrowingsList);
-
-        Library myLibrary = new Library(bookList, studentList); //Creates our library with students and books arrays
+        Library myLibrary = new Library(bookList, studentList, borrowingsList); //Creates our library with students and books arrays
 
         //System.out.println(studentList); //Test to check studentArray
         //Creates an Array of options for the menu
@@ -152,8 +47,7 @@ public class LibrarySystemTeam {
 
         //To create a menu object with the menuOptions Array
         Menu menuLibrary = new Menu(menuOptions);
-        
-
+       
         boolean inputValid;
 
         do {
@@ -328,11 +222,7 @@ public class LibrarySystemTeam {
 
                             System.out.println("Sorry, this book is borrowed by another student.");//Then it needs to be added to a waiting list (queue)
                             // Adding to queue
-                            myLibrary.addWaitingList(waitingLists, searched_book_Title, selected_id);
-                            
-//                            Queue waiting_list = new Queue(100);
-//                            waiting_list.Enqueue(selected_id);
-//                            waitingList.add(new WaitingList(searched_book_Title, waiting_list));
+                            myLibrary.addWaitingList(waitingLists, searched_book_Title, selected_id);                           
                             
                             System.out.println("Student " + selected_id + " added to Waiting List.");
                             
@@ -366,53 +256,6 @@ public class LibrarySystemTeam {
                             }
                         }
 
-//                    try ( BufferedReader myBuffer = new BufferedReader(new FileReader("BorrowingList.txt"))) { //To read the file
-//
-//                    String line; // To store each line of the file
-//                    line = myBuffer.readLine();//Assign line variable the first line value so when we start our while loop starts from second line
-//
-//                    while ((line = myBuffer.readLine()) != null) { // while loop  to go through the file line by line until line is equals to null
-//                        String[] values = line.split(","); // String Array to store the separated values on the line
-//                        //System.out.println(values[1]) Test;
-//
-//                        //Variables to store values an pass them to the new book object 
-//                        String student_id = values[0];
-//                        String book_title = values[1];
-//                        
-//                        Queue borrowings2 = new Queue(100);
-//                        String myBorrowedBook = (student_id + book_title);// Create a String
-//                            
-//                        if(selected_title.equals(book_title)){
-//                            
-//                    try{
-//
-//                        // Initializing BufferedWriter
-//                        BufferedWriter myWriter = new BufferedWriter(new FileWriter("WaitingList.txt", true));
-//                        System.out.println("Adding book to Waiting List...");
-//
-//                        myWriter.write("\n" + myBorrowedBook);
-//
-//                        // Closing BufferWriter 
-//                        myWriter.close();
-//                        System.out.println("Added to Waiting List.");
-//
-//                    }
-//                    catch (IOException except)
-//                    {
-//                        System.out.println("Error writing this file.");
-//                            
-//    
-//                        }
-//                    }else{
-//                        borrowings.Enqueue(myBorrowedBook); // adding book objects to a Queue
-//                        }
-//                    }
-//                } catch (FileNotFoundException ex) {
-//                    System.out.println("File not found");
-//
-//                } catch (IOException ex) {
-//                    System.out.println("IOException");
-//                }
                     }
                     break;      
                 case 5:
