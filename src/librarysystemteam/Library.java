@@ -41,8 +41,8 @@ public class Library {
             
             for (int i = 0; i < bookList.size() ; i++) {
                 Book myBook = bookList.get(i);
-                String title = myBook.getBook_title().toLowerCase();// create variables to set them to lower case 
-                String name = myBook.getAuthor_name().toLowerCase();
+                String title = myBook.getBook_title().toLowerCase();// Variable to store its value and set it to lower case 
+                String name = myBook.getAuthor_name().toLowerCase();// Variable to store its value and set it to lower case 
                 
                 if (title.contains(targetBook.toLowerCase()) || name.contains(targetBook.toLowerCase())) 
                     return myBook;
@@ -56,7 +56,7 @@ public class Library {
         for (int i = 0; i < studentList.size() ; i++) {
             Student myStudent = studentList.get(i);
             String ID = myStudent.studentID;
-            String name = myStudent.student_name.toLowerCase();// create variables to set them to lower case 
+            String name = myStudent.student_name.toLowerCase();// create variable to store its value and set them to lower case 
 
             if (ID.contains(targetStudent.toLowerCase()) || name.contains(targetStudent.toLowerCase())) //ID.contains(targetStudent.toLowerCase()) ||
                 return myStudent;
@@ -234,11 +234,11 @@ public class Library {
         //return following_student;
     }
     
-    public boolean addWaitingList(ArrayList<WaitingList> waitingList, Book book, String StudentID){
-        for (int i = 0; i < waitingList.size(); i++) {
-            if(waitingList.get(i).getBook().book_title.equalsIgnoreCase(book.getBook_title())){
+    public boolean addWaitingList(ArrayList<WaitingList> waitingLists, Book book, String StudentID){
+        for (int i = 0; i < waitingLists.size(); i++) {
+            if(waitingLists.get(i).getBook().book_title.equalsIgnoreCase(book.getBook_title())){
                 // adding to waiting List
-                waitingList.get(i).getQueue().Enqueue(StudentID);
+                waitingLists.get(i).getQueue().Enqueue(StudentID);
 
                 return true;
             }
@@ -246,8 +246,8 @@ public class Library {
         }
         
                             Queue waiting_list = new Queue(100);
-                            waiting_list.Enqueue(StudentID);
-                            waitingList.add(new WaitingList(book));
+                            waiting_list.Enqueue(StudentID + ",");
+                            waitingLists.add(new WaitingList(book, waiting_list));
         return true;
     }
     
@@ -292,7 +292,7 @@ public class Library {
      
    }
    
-   public void writeWaitingList(ArrayList<WaitingList> waitingList){ //Needs to be fixed
+   public void writeWaitingList(ArrayList<WaitingList> waitingList){ 
    
    
        try {
