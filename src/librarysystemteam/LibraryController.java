@@ -4,6 +4,9 @@
  */
 package librarysystemteam;
 
+import librarysystemteam.utils.Menu;
+import librarysystemteam.utils.Borrowings;
+import librarysystemteam.utils.WaitingList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

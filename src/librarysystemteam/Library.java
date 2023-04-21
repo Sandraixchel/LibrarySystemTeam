@@ -4,6 +4,9 @@
  */
 package librarysystemteam;
 
+import librarysystemteam.utils.Queue;
+import librarysystemteam.utils.Borrowings;
+import librarysystemteam.utils.WaitingList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -169,12 +172,12 @@ public class Library {
         for (int i = 0; i < n - 1; i++) {
 
             for (int j = 0; j < n - i - 1; j++) {//Fix with ID
-                if (studentList.get(j).getStudentID().compareToIgnoreCase(studentList.get(j + 1).getStudentID()) > 0) {
+                if (studentList.get(j).getStudentID().compareTo(studentList.get(j + 1).getStudentID()) > 0) {
 
                     Student temp = studentList.get(j);
 
                     studentList.set(j, studentList.get(j + 1));
-                    studentList.set(j + 1, temp);
+                    studentList.set(j, temp);
                 }
             }
         }
@@ -279,27 +282,6 @@ public class Library {
 
     }
 
-//   public void writeWaitingList(ArrayList<WaitingList> waitingList){ 
-//   
-//   
-//       try {
-//            
-//            BufferedWriter myWriter;
-//            myWriter = new BufferedWriter(new FileWriter("WaitingList.txt", true));
-//            myWriter.write("ID,Book Title");
-//            
-//            for(WaitingList nextWaiting : waitingList ){ //To go through the borrowings list Array one by one
-//                
-//           // myWriter.write("\n" +nextWaiting. + ","+ borrowed.bookTitle);
-//            
-//            }           
-//          myWriter.close();// Closing BufferWriter
-//        } catch (IOException ex) {
-//            Logger.getLogger(Library.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//          System.out.println("Adding book...");
-//   
-//   }
     public void listStudentBorrowings(ArrayList<Borrowings> borrowingsList, String searchedStudent) {
 
         //System.out.println("The student:" + searchedStudent + " has borrowed: ");
