@@ -200,7 +200,7 @@ public class LibraryController {
                     //Library.linearSearchBook(bookList, selected_title_author);
                     Student searchedID = linearSearchStudent(studentList, selected_id);
                     if (searchedID == null) {
-                        System.out.println("Sorry, we couldn't find that student. Please enter another student ID again.");
+                        System.out.println("Sorry, we couldn't find that student");
                     } else {
                         System.out.println(searchedID);
 
@@ -275,7 +275,7 @@ public class LibraryController {
                     
                     //Calls in the returnBook method
                     borrowingsList = myLibrary.returnBook(studentID, bookTitle, borrowingsList);
-                    System.out.println(borrowingsList);
+                    //System.out.println(borrowingsList);
                     
                     myLibrary.followingWaitingList(waitingLists, bookTitle);
                     //System.out.println("Following :" + following_student );

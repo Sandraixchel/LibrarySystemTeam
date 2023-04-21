@@ -57,7 +57,7 @@ public class Library {
             String ID = myStudent.studentID;
             String name = myStudent.student_name.toLowerCase();// create variable to store its value and set them to lower case 
 
-            if (ID.contains(targetStudent.toLowerCase()) || name.contains(targetStudent.toLowerCase())) //ID.contains(targetStudent.toLowerCase()) ||
+            if (ID.equals(targetStudent.toLowerCase()) || name.contains(targetStudent.toLowerCase())) //ID.contains(targetStudent.toLowerCase()) ||
             {
                 return myStudent;
             }
@@ -214,7 +214,7 @@ public class Library {
 
     public void followingWaitingList(ArrayList<WaitingList> waitingList, String bookTitle) {
         for (int i = 0; i < waitingList.size(); i++) {
-            if (waitingList.get(i).getBook().book_title.equalsIgnoreCase(bookTitle)) {
+            if (waitingList.get(i).getBook().book_title.contains(bookTitle)) {
                 // A waiting List exists
                 String following_student = waitingList.get(i).getQueue().Dequeue();
                 System.out.println("Following student:" + following_student);
@@ -249,6 +249,7 @@ public class Library {
                     && borrowingsList.get(i).bookTitle.toLowerCase().contains(searched_bookTitle.toLowerCase())) {
                 System.out.println("This book has been returned");
                 borrowingsList.remove(i);
+                
                 found = true;
                 break;
             }

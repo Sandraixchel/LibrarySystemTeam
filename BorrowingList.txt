@@ -1,8 +1,5 @@
 ID,Book Title
-23,Hot Lead and Cold Feet
-45,Vamps
-56,Gunless
-23,"Day of the Beast
 561,Black Roses 
-65,Lust for Love
 643,Richard Pryor Live on the Sunset Strip
+865,Gunless
+46,Blood Shot
